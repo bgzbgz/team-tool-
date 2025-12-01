@@ -1135,25 +1135,46 @@
         
         /* Sprint Context */
         .sprint-context {
-            background: var(--grey-900);
+            background: linear-gradient(135deg, var(--grey-900) 0%, #1a2e1a 100%);
             color: var(--white);
-            border-radius: 4px;
-            padding: 20px 24px;
+            border-radius: 8px;
+            padding: 48px 40px;
             margin-bottom: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
+            text-align: center;
+            border: 2px solid var(--green);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sprint-context::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--green);
         }
         
         .sprint-context h4 { 
             color: var(--green); 
-            font-size: 14px;
+            font-size: 28px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        .sprint-progress-text { color: var(--grey-400); font-size: 13px; }
+        
+        .sprint-context h4 .icon { font-size: 32px; }
+        
+        .sprint-progress-text { 
+            color: var(--white); 
+            font-size: 18px; 
+            opacity: 0.9;
+        }
         
         /* Export */
         .export-buttons {
@@ -1812,10 +1833,10 @@
 
             <div class="sprint-context">
                 <h4>
-                    <span class="icon icon-sm"><i data-lucide="check-circle"></i></span>
+                    <span class="icon icon-lg"><i data-lucide="trophy"></i></span>
                     Sprint 5 of 32 Complete!
                 </h4>
-                <div class="sprint-progress-text">You're 15.6% through the Fast Track Program</div>
+                <div class="sprint-progress-text">🎉 You're 15.6% through the Fast Track Program</div>
             </div>
 
             <div class="card">
