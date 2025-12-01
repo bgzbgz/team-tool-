@@ -3312,6 +3312,26 @@
         function updateWWW(index, field, value) {
             if (!actions[index]) actions[index] = { what: '', who: '', when: '' };
             actions[index][field] = value;
+            
+            // Check if all 3 actions are complete and show commitment section
+            const allActionsComplete = actions.slice(0, 3).every(a => a.what && a.who && a.when);
+            const commitmentSection = document.getElementById('commitment-section');
+            
+            if (commitmentSection) {
+                if (allActionsComplete) {
+                    commitmentSection.style.display = 'block';
+                    if (!commitmentSection.dataset.shown) {
+                        commitmentSection.dataset.shown = 'true';
+                        setTimeout(() => {
+                            commitmentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 100);
+                    }
+                } else {
+                    commitmentSection.style.display = 'none';
+                    commitmentSection.dataset.shown = '';
+                }
+            }
+            
             updateProgress();
         }
 
