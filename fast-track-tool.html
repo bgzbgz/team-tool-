@@ -391,31 +391,26 @@
         
         .form-group { margin-bottom: 20px; }
         
-        /* Statement Card */
-        .statement-card {
+        /* Team Member Card */
+        .team-member-card {
             background: var(--white);
             border: 1px solid var(--grey-200);
             border-radius: 4px;
             padding: 28px;
             margin-bottom: 20px;
-            transition: all 0.3s ease;
         }
         
-        .statement-card.completed {
-            border-color: var(--green);
-            background: var(--grey-50);
-        }
-        
-        .statement-header {
+        .team-member-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
+            gap: 20px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
         }
         
-        .statement-number {
-            width: 40px;
-            height: 40px;
+        .member-number {
+            width: 32px;
+            height: 32px;
             background: var(--yellow-400);
             color: var(--black);
             border-radius: 4px;
@@ -423,176 +418,22 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 14px;
             flex-shrink: 0;
-            flex-shrink: 0;
         }
         
-        .statement-dysfunction-badge {
-            padding: 4px 10px;
-            background: var(--grey-100);
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--grey-600);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        
-        .statement-text {
-            font-size: 15px;
-            line-height: 1.7;
-            color: var(--grey-800);
-            margin-bottom: 16px;
-            font-weight: 500;
-        }
-        
-        .statement-hint {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 16px;
-            background: var(--yellow-50);
-            border-radius: 4px;
-            font-size: 13px;
-            color: var(--grey-600);
-            margin-bottom: 20px;
-        }
-        
-        .statement-hint .icon { color: var(--yellow-600); }
-        
-        .rating-buttons {
+        .member-inputs {
             display: flex;
             gap: 12px;
-        }
-        
-        .rating-btn {
             flex: 1;
-            padding: 18px 16px;
-            border: 2px solid var(--grey-300);
-            border-radius: 4px;
-            background: var(--white);
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: inherit;
+            flex-wrap: wrap;
         }
         
-        .rating-btn:hover {
-            border-color: var(--grey-500);
-            transform: translateY(-2px);
-            background: var(--grey-50);
+        .member-inputs input {
+            flex: 1;
+            min-width: 150px;
         }
         
-        .rating-btn.active { border-width: 3px; }
-        .rating-btn.active.rating-good { border-color: var(--green); background: var(--green); color: white; }
-        .rating-btn.active.rating-moderate { border-color: var(--amber); background: var(--amber); color: white; }
-        .rating-btn.active.rating-bad { border-color: var(--red); background: var(--red); color: white; }
-        .rating-btn.active:hover { transform: translateY(-2px); }
-        
-        .rating-label-only { font-size: 16px; font-weight: 600; }
-        
-        /* Dysfunction Score Card (Scores Tab) */
-        .dysfunction-score-card {
-            background: var(--white);
-            border: 1px solid var(--grey-200);
-            border-radius: 4px;
-            padding: 32px;
-            margin-bottom: 20px;
-        }
-        
-        .dysfunction-score-card.critical { border-left: 4px solid var(--red); }
-        .dysfunction-score-card.moderate { border-left: 4px solid var(--amber); }
-        .dysfunction-score-card.healthy { border-left: 4px solid var(--green); }
-        
-        .dysfunction-score-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-        
-        .priority-badge {
-            background: var(--yellow-400);
-            color: var(--black);
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        
-        .status-badge-lg {
-            padding: 6px 14px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: white;
-        }
-        
-        .status-badge-lg.critical { background: var(--red); }
-        .status-badge-lg.moderate { background: var(--amber); }
-        .status-badge-lg.healthy { background: var(--green); }
-        
-        .score-display {
-            display: flex;
-            align-items: baseline;
-            gap: 4px;
-            margin: 24px 0;
-        }
-        
-        .score-value { font-size: 64px; font-weight: 900; font-family: 'Plaak', sans-serif; line-height: 1; }
-        .score-max { font-size: 32px; color: var(--grey-400); font-weight: 600; }
-        
-        .score-breakdown {
-            background: var(--grey-50);
-            border-radius: 4px;
-            padding: 20px;
-            margin-top: 24px;
-        }
-        
-        .score-breakdown h5 {
-            font-size: 12px;
-            color: var(--grey-600);
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-family: 'Riforma', sans-serif;
-            font-weight: 400;
-        }
-        
-        .statement-score-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid var(--grey-200);
-            font-size: 13px;
-        }
-        
-        .statement-score-item:last-child { border-bottom: none; }
-        .statement-score-item .rating-good { color: var(--green); font-weight: 600; }
-        .statement-score-item .rating-moderate { color: var(--amber); font-weight: 600; }
-        .statement-score-item .rating-bad { color: var(--red); font-weight: 600; }
-        
-        .action-preview {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid var(--grey-200);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--grey-600);
-            font-size: 13px;
-        }
-        
-        .action-preview .icon { color: var(--yellow-600); }
-        
-        /* Complete badge */
         .complete-badge {
             background: var(--green);
             color: white;
@@ -603,6 +444,68 @@
             display: flex;
             align-items: center;
             gap: 4px;
+        }
+        
+        /* Sliders */
+        .sliders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 24px;
+        }
+        
+        .slider-container { position: relative; }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .slider-label span:first-child { 
+            font-weight: 500; 
+            font-size: 13px; 
+            color: var(--grey-700);
+        }
+        
+        .slider-score {
+            font-size: 20px;
+            font-weight: 700;
+            min-width: 32px;
+            text-align: right;
+        }
+        
+        .slider-score.healthy { color: var(--green); }
+        .slider-score.moderate { color: var(--amber); }
+        .slider-score.critical { color: var(--red); }
+        
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--grey-200);
+            outline: none;
+            padding: 0;
+            border: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--black);
+            cursor: pointer;
+            border: 2px solid var(--white);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .slider-hint {
+            font-size: 11px;
+            color: var(--grey-500);
+            margin-top: 6px;
+            min-height: 16px;
         }
         
         /* Progress */
@@ -1286,12 +1189,8 @@
                 Reference
             </button>
             <button class="tab-btn" onclick="showTab('assessment')" id="tab-assessment">
-                <span class="icon icon-sm"><i data-lucide="clipboard-list"></i></span>
+                <span class="icon icon-sm"><i data-lucide="bar-chart-2"></i></span>
                 Assessment
-            </button>
-            <button class="tab-btn" onclick="showTab('scores')" id="tab-scores" disabled>
-                <span class="icon icon-sm"><i data-lucide="lock"></i></span>
-                Your Scores
             </button>
             <button class="tab-btn" onclick="showTab('action')" id="tab-action" disabled>
                 <span class="icon icon-sm"><i data-lucide="lock"></i></span>
@@ -1424,16 +1323,16 @@
                     <div style="flex: 1; min-width: 280px;">
                         <h3 style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
                             <span class="icon icon-md" style="color: var(--yellow-600);"><i data-lucide="lightbulb"></i></span>
-                            New to Team Assessments?
+                            New to the Assessment?
                         </h3>
                         <p style="color: var(--grey-600); margin-bottom: 16px; line-height: 1.7;">
-                            Load example responses to see how a C-level team member rated these statements. 
-                            You can review the example, then clear it to enter your own assessment.
+                            Load example data to see how the tool works before entering your own team's information. 
+                            This will populate the form with a sample C-level team assessment.
                         </p>
                         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                             <button class="btn btn-yellow" onclick="loadExampleAndHide()">
                                 <span class="icon icon-sm"><i data-lucide="clipboard-paste"></i></span>
-                                Load Example Assessment
+                                Load Example Data
                             </button>
                             <button class="btn btn-secondary" onclick="hideExamplePrompt()">
                                 Start Fresh
@@ -1443,62 +1342,47 @@
                     <div style="background: var(--white); border: 1px solid var(--grey-200); border-radius: 4px; padding: 16px; min-width: 200px;">
                         <h5 style="font-size: 12px; color: var(--grey-500); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">Example includes:</h5>
                         <ul style="font-size: 13px; color: var(--grey-600); margin: 0; padding-left: 18px; line-height: 1.8;">
-                            <li>All 15 statements rated</li>
-                            <li>Realistic team dynamics</li>
-                            <li>Shows interpretation</li>
+                            <li>5 team members with roles</li>
+                            <li>All dysfunction ratings</li>
+                            <li>CEO & company info</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- YOUR INFORMATION (MOVED TO TOP) -->
             <div class="card">
                 <h3>
-                    <span class="icon icon-md"><i data-lucide="user"></i></span>
-                    Your Information
+                    <span class="icon icon-md"><i data-lucide="bar-chart-2"></i></span>
+                    Assessment Progress
                 </h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                    <div class="form-group" style="margin-bottom: 0;">
-                        <label>Your Name (Required)</label>
-                        <input type="text" id="assessor-name" placeholder="e.g., Sarah Chen" onchange="updateProgress()" oninput="updateProgress()">
+                <div class="progress-summary">
+                    <div class="progress-item">
+                        <h4>Team Members</h4>
+                        <div class="value" id="named-count">0/5+</div>
                     </div>
-                    <div class="form-group" style="margin-bottom: 0;">
-                        <label>Your Role (Optional)</label>
-                        <input type="text" id="assessor-role" placeholder="e.g., CFO">
+                    <div class="progress-item">
+                        <h4>Ratings Complete</h4>
+                        <div class="value" id="ratings-count">0/0</div>
                     </div>
+                    <div class="progress-item">
+                        <h4>Members Complete</h4>
+                        <div class="value" id="complete-count">0/5</div>
+                    </div>
+                    <div class="progress-item">
+                        <h4>Status</h4>
+                        <div class="value" id="status-text" style="color: var(--amber);">In Progress</div>
+                    </div>
+                </div>
+                <div class="quick-view" id="quick-view" style="display: none;">
+                    <strong style="color: var(--grey-400);">Quick View:</strong>
+                    <div id="quick-view-items" style="display: contents;"></div>
                 </div>
             </div>
 
-            <!-- Rating Scale Guide (without numbers) -->
-            <div class="card" style="background: var(--yellow-50); border-color: var(--yellow-300);">
-                <h3>
-                    <span class="icon icon-md"><i data-lucide="help-circle"></i></span>
-                    How to Rate Each Statement
-                </h3>
-                <p style="color: var(--grey-700); margin-bottom: 20px;">
-                    Rate how frequently each behavior occurs in YOUR TEAM based on the last 90 days:
-                </p>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
-                    <div style="text-align: center; padding: 16px; background: var(--white); border-radius: 4px; border-left: 3px solid var(--green);">
-                        <div style="font-size: 18px; font-weight: 700; color: var(--green); margin-bottom: 4px;">Usually</div>
-                        <div style="font-size: 12px; color: var(--grey-600);">This happens most of the time</div>
-                    </div>
-                    <div style="text-align: center; padding: 16px; background: var(--white); border-radius: 4px; border-left: 3px solid var(--amber);">
-                        <div style="font-size: 18px; font-weight: 700; color: var(--amber); margin-bottom: 4px;">Sometimes</div>
-                        <div style="font-size: 12px; color: var(--grey-600);">This happens occasionally</div>
-                    </div>
-                    <div style="text-align: center; padding: 16px; background: var(--white); border-radius: 4px; border-left: 3px solid var(--red);">
-                        <div style="font-size: 18px; font-weight: 700; color: var(--red); margin-bottom: 4px;">Rarely</div>
-                        <div style="font-size: 12px; color: var(--grey-600);">This hardly ever happens</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Brain Juice Connection -->
             <div class="brain-juice-box">
                 <h4>
                     <span class="icon icon-md"><i data-lucide="book-open"></i></span>
-                    Rate YOUR TEAM's current reality (not how you wish it to be)
+                    You've learned the framework. Now assess YOUR team's reality.
                 </h4>
                 <div class="brain-juice-questions">
                     <div class="brain-juice-question"><strong>TRUST:</strong><span>Do team members admit mistakes openly?</span></div>
@@ -1509,156 +1393,37 @@
                 </div>
             </div>
 
-            <!-- The 15 Statement Cards -->
-            <div id="statements-container"></div>
+            <div id="team-members-container"></div>
 
-            <!-- ASSESSMENT PROGRESS (MOVED TO BOTTOM) -->
-            <div class="card">
-                <h3>
-                    <span class="icon icon-md"><i data-lucide="bar-chart-2"></i></span>
-                    Your Assessment Progress
-                </h3>
-                <div class="progress-summary">
-                    <div class="progress-item">
-                        <h4>Statements Rated</h4>
-                        <div class="value" id="statements-count">0/15</div>
-                    </div>
-                    <div class="progress-item">
-                        <h4>Completion</h4>
-                        <div class="value" id="completion-pct">0%</div>
-                    </div>
-                    <div class="progress-item">
-                        <h4>SAP Progress</h4>
-                        <div class="value" style="color: var(--yellow-600);" id="sap-progress">+0</div>
-                    </div>
-                    <div class="progress-item">
-                        <h4>Status</h4>
-                        <div class="value" id="assessment-status" style="color: var(--amber);">In Progress</div>
-                    </div>
-                </div>
-                <div class="quick-view" id="quick-view" style="display: none;">
-                    <strong style="color: var(--grey-400);">Live Scores:</strong>
-                    <div id="quick-view-items" style="display: contents;"></div>
-                </div>
-            </div>
+            <button class="btn btn-secondary" onclick="addTeamMember()" id="add-member-btn" style="width: 100%; margin-bottom: 24px;">
+                <span class="icon icon-sm"><i data-lucide="plus"></i></span>
+                Add Team Member (5/8)
+            </button>
 
             <div class="btn-nav">
                 <button class="btn btn-secondary" onclick="showTab('reference')">
                     <span class="icon icon-sm"><i data-lucide="arrow-left"></i></span>
                     Back to Reference
                 </button>
-                <button class="btn btn-primary" onclick="showTab('scores')" id="view-scores-btn" disabled>
-                    View Your Scores
+                <button class="btn btn-primary" onclick="showTab('action')" id="continue-action-btn" disabled>
+                    Continue to Action Plan
                     <span class="icon icon-sm"><i data-lucide="arrow-right"></i></span>
                 </button>
             </div>
         </div>
 
-        <!-- TAB 3: YOUR SCORES (NEW) -->
-        <div id="scores" class="tab-content">
-            <!-- Success Hero -->
-            <div class="hero" style="background: var(--green);">
-                <div class="hero-header">
-                    <span class="icon icon-lg"><i data-lucide="check-circle"></i></span>
-                    <h1 style="color: white;">Assessment Complete!</h1>
-                </div>
-                <p style="color: rgba(255,255,255,0.9);">You've honestly assessed your team's dynamics. Your Guru will compile everyone's responses for the team discussion.</p>
-            </div>
-
-            <!-- SAP Earned Card -->
-            <div class="card" style="background: var(--yellow-400); border-color: var(--yellow-400);">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <h3 style="margin-bottom: 8px;">
-                            <span class="icon icon-md"><i data-lucide="star"></i></span>
-                            SAP Earned
-                        </h3>
-                        <p style="margin: 0; font-size: 14px; opacity: 0.8;">For completing your individual assessment</p>
-                    </div>
-                    <div style="font-size: 48px; font-weight: 900; font-family: 'Plaak', sans-serif;">+25</div>
-                </div>
-            </div>
-
-            <!-- Your 5 Dysfunction Scores -->
-            <h2 style="margin-bottom: 24px;">Your Team's Dysfunction Scores</h2>
-            
-            <div id="dysfunction-scores-grid"></div>
-
-            <!-- What Happens Next -->
-            <div class="card">
-                <h3>
-                    <span class="icon icon-md"><i data-lucide="arrow-right-circle"></i></span>
-                    What Happens Next
-                </h3>
-                <ol style="margin-left: 20px; color: var(--grey-700); line-height: 2;">
-                    <li><strong>Guru Compiles Results:</strong> Your Guru will combine all team members' assessments</li>
-                    <li><strong>Team Discussion:</strong> You'll review compiled results together during Fast Track hour</li>
-                    <li><strong>Action Planning:</strong> Team collaboratively creates improvement plan (next tab)</li>
-                    <li><strong>CEO Commitment:</strong> CEO commits to implementing actions at Forum</li>
-                </ol>
-            </div>
-
-            <!-- Export Your Assessment -->
-            <div class="card">
-                <h3>
-                    <span class="icon icon-md"><i data-lucide="share-2"></i></span>
-                    Share Your Assessment
-                </h3>
-                <p style="color: var(--grey-600); margin-bottom: 20px;">
-                    Send your results to your Guru for compilation.
-                </p>
-                <div style="display: flex; gap: 12px;">
-                    <button class="btn btn-primary" onclick="window.print()">
-                        <span class="icon icon-sm"><i data-lucide="file-text"></i></span>
-                        Export PDF
-                    </button>
-                    <button class="btn btn-secondary" onclick="copyLink()">
-                        <span class="icon icon-sm"><i data-lucide="link"></i></span>
-                        Copy Link
-                    </button>
-                </div>
-            </div>
-
-            <div class="btn-nav">
-                <button class="btn btn-secondary" onclick="showTab('assessment')">
-                    <span class="icon icon-sm"><i data-lucide="arrow-left"></i></span>
-                    Back to Assessment
-                </button>
-                <button class="btn btn-primary" onclick="showTab('action')">
-                    Continue to Action Planning
-                    <span class="icon icon-sm"><i data-lucide="arrow-right"></i></span>
-                </button>
-            </div>
-        </div>
-
-        <!-- TAB 4: ACTION PLAN -->
+        <!-- TAB 3: ACTION PLAN -->
         <div id="action" class="tab-content">
-            <!-- Collaborative Process Note -->
-            <div class="card" style="background: var(--yellow-50); border-color: var(--yellow-300);">
-                <h4 style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                    <span class="icon icon-md" style="color: var(--yellow-600);"><i data-lucide="info"></i></span>
-                    Important: Collaborative Process
-                </h4>
-                <p style="margin: 0; color: var(--grey-700); line-height: 1.7;">
-                    These priorities are based on YOUR assessment. During the Fast Track hour, your Guru will present 
-                    COMPILED results from all team members, and the TEAM will collectively decide on the final 3 
-                    priorities and action plan.
-                </p>
-            </div>
-
             <div class="card card-yellow">
                 <h3>
                     <span class="icon icon-md"><i data-lucide="target"></i></span>
-                    Team's Top 3 Priority Areas
+                    Your Top 3 Priority Areas
                 </h3>
-                <p style="color: var(--grey-600); margin-bottom: 24px; margin-top: -16px; font-size: 13px;">Based on team's collective assessment. Complete these actions during your Fast Track hour.</p>
+                <p style="color: var(--grey-600); margin-bottom: 24px; margin-top: -16px; font-size: 13px;">Auto-calculated from your assessment scores (lowest = highest priority)</p>
                 <div class="priority-cards" id="priority-cards"></div>
             </div>
 
             <div id="action-cards-container"></div>
-
-            <!-- Add Another Action Button -->
-            <div id="add-action-btn-container" style="margin-bottom: 24px;"></div>
 
             <!-- Actions incomplete message -->
             <div id="actions-incomplete-msg" class="card" style="text-align: center; padding: 48px 32px; background: var(--grey-50); border: 2px dashed var(--grey-300);">
@@ -1920,31 +1685,13 @@
             init();
         });
 
-        // Data - The 15 Behavioral Statements (Lencioni's Framework)
-        const STATEMENTS = [
-            { id: 1, text: "Team members are passionate and unguarded in the discussion of issues.", dysfunction: "conflict", hint: "Do people speak freely or hold back?" },
-            { id: 2, text: "Team members call out one another's deficiencies or unproductive behaviors.", dysfunction: "accountability", hint: "Do peers address issues directly?" },
-            { id: 3, text: "Team members know what their peers are working on and how they contribute to the collective good of the team.", dysfunction: "commitment", hint: "Is everyone aligned on team goals?" },
-            { id: 4, text: "Team members quickly and genuinely apologize to one another when they say or do something inappropriate or possibly damaging to the team.", dysfunction: "trust", hint: "Do people admit mistakes easily?" },
-            { id: 5, text: "Team members willingly make sacrifices (such as budget, turf, head count) in their departments or areas of expertise for the good of the team.", dysfunction: "results", hint: "Does 'we' win over 'me'?" },
-            { id: 6, text: "Team members openly admit their weaknesses and mistakes.", dysfunction: "trust", hint: "Is vulnerability safe in your team?" },
-            { id: 7, text: "Team meetings are compelling and not boring.", dysfunction: "conflict", hint: "Are meetings engaging or dull?" },
-            { id: 8, text: "Team members leave meetings confident that their peers are completely committed to the decisions that were agreed on, even if there was initial disagreement.", dysfunction: "commitment", hint: "Do decisions stick?" },
-            { id: 9, text: "Morale is significantly affected by the failure to achieve team goals.", dysfunction: "results", hint: "Does team success matter to everyone?" },
-            { id: 10, text: "During team meetings, the most important and difficult issues are put on the table to be resolved.", dysfunction: "conflict", hint: "Do you tackle the hard topics?" },
-            { id: 11, text: "Team members are deeply concerned about the prospect of letting down their peers.", dysfunction: "accountability", hint: "Do people care about peer expectations?" },
-            { id: 12, text: "Team members know about one another's personal lives and are comfortable discussing them.", dysfunction: "trust", hint: "Is there personal connection?" },
-            { id: 13, text: "Team members end discussions with clear and specific resolutions and call to action.", dysfunction: "commitment", hint: "Are decisions clear and actionable?" },
-            { id: 14, text: "Team members challenge one another about their plans and approaches.", dysfunction: "accountability", hint: "Do people constructively challenge each other?" },
-            { id: 15, text: "Team members are slow to seek credit for their own contributions but quick to point out those of others.", dysfunction: "results", hint: "Who gets recognized - individuals or the team?" }
-        ];
-
+        // Data
         const DYSFUNCTIONS = [
-            { id: 'trust', name: 'Absence of Trust', shortName: 'Trust', statements: [4, 6, 12] },
-            { id: 'conflict', name: 'Fear of Conflict', shortName: 'Conflict', statements: [1, 7, 10] },
-            { id: 'commitment', name: 'Lack of Commitment', shortName: 'Commit', statements: [3, 8, 13] },
-            { id: 'accountability', name: 'Avoidance of Accountability', shortName: 'Account', statements: [2, 11, 14] },
-            { id: 'results', name: 'Inattention to Results', shortName: 'Results', statements: [5, 9, 15] }
+            { id: 'trust', name: 'Absence of Trust', shortName: 'Trust' },
+            { id: 'conflict', name: 'Fear of Conflict', shortName: 'Conflict' },
+            { id: 'commitment', name: 'Lack of Commitment', shortName: 'Commit' },
+            { id: 'accountability', name: 'Avoidance of Accountability', shortName: 'Account' },
+            { id: 'results', name: 'Inattention to Results', shortName: 'Results' }
         ];
 
         const BRAIN_JUICE_ACTIONS = {
@@ -1955,36 +1702,32 @@
             results: ['Align individual with team goals quarterly', 'Shared success metrics dashboard', 'Celebrate collective achievements', '"We over me" recognition programs']
         };
 
-        const EXAMPLE_ASSESSMENT = {
-            assessorName: "Sarah Chen",
-            assessorRole: "CFO",
-            responses: {
-                1: 2, 2: 1, 3: 3, 4: 2, 5: 3,
-                6: 2, 7: 2, 8: 1, 9: 3, 10: 2,
-                11: 2, 12: 3, 13: 1, 14: 2, 15: 3
-            }
+        const EXAMPLE_DATA = {
+            teamMembers: [
+                { name: "John Peterson", role: "COO", ratings: { trust: 7, conflict: 6, commitment: 8, accountability: 7, results: 9 } },
+                { name: "Sarah Chen", role: "CFO", ratings: { trust: 3, conflict: 4, commitment: 2, accountability: 5, results: 8 } },
+                { name: "Mike Rodriguez", role: "CTO", ratings: { trust: 8, conflict: 7, commitment: 8, accountability: 9, results: 9 } },
+                { name: "Lisa Kumar", role: "CMO", ratings: { trust: 6, conflict: 5, commitment: 7, accountability: 6, results: 7 } },
+                { name: "Tom Anderson", role: "VP Sales", ratings: { trust: 7, conflict: 8, commitment: 6, accountability: 8, results: 9 } }
+            ],
+            ceoName: "Maria Santos",
+            companyName: "TechCorp Manufacturing"
         };
 
         // State
-        let assessment = {
-            assessorName: '',
-            assessorRole: '',
-            responses: {},
-            scoresViewed: false
-        };
+        let teamMembers = [];
         let actions = [{}, {}, {}];
         let currentTab = 'reference';
 
         // Initialize
         function init() {
-            // Initialize empty responses for all 15 statements
-            STATEMENTS.forEach(s => {
-                assessment.responses[s.id] = 0;
-            });
-            renderStatements();
+            for (let i = 0; i < 5; i++) {
+                teamMembers.push({ name: '', role: '', ratings: { trust: 0, conflict: 0, commitment: 0, accountability: 0, results: 0 } });
+            }
+            renderTeamMembers();
             updateProgress();
             
-            ['assessor-name', 'assessor-role', 'ceo-name', 'company-name', 'forum-date', 'team-share-date', 'guru-review-date', 'binding-commitment', 'signature'].forEach(id => {
+            ['ceo-name', 'company-name', 'forum-date', 'team-share-date', 'guru-review-date', 'binding-commitment', 'signature'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.addEventListener('change', updateProgress);
                 if (el) el.addEventListener('input', updateProgress);
@@ -2009,53 +1752,24 @@
             
             currentTab = tabId;
             
-            if (tabId === 'scores') {
-                assessment.scoresViewed = true;
-                renderScoresTab();
-            }
             if (tabId === 'action') renderActionTab();
             if (tabId === 'dashboard') renderDashboard();
             
-            updateProgress();
             lucide.createIcons();
             window.scrollTo(0, 0);
         }
 
-        // Helpers - New scoring for 1-3 scale (max 9 per dysfunction)
+        // Helpers
         function getStatus(score) {
-            if (score >= 8) return 'healthy';
-            if (score >= 6) return 'moderate';
+            if (score >= 7) return 'healthy';
+            if (score >= 4) return 'moderate';
             return 'critical';
         }
 
         function getStatusLabel(score) {
-            if (score >= 8) return 'NO PROBLEM';
-            if (score >= 6) return 'POSSIBLE PROBLEM';
-            return 'SERIOUS PROBLEM';
-        }
-
-        function getRatingLabel(rating) {
-            if (rating === 3) return 'Usually';
-            if (rating === 2) return 'Sometimes';
-            if (rating === 1) return 'Rarely';
-            return '-';
-        }
-
-        function getRatingStatus(rating) {
-            if (rating === 3) return 'good';
-            if (rating === 2) return 'moderate';
-            if (rating === 1) return 'bad';
-            return '';
-        }
-
-        // Calculate dysfunction scores from statement responses
-        function calculateScores() {
-            const scores = {};
-            DYSFUNCTIONS.forEach(d => {
-                const stmtScores = d.statements.map(id => assessment.responses[id] || 0);
-                scores[d.id] = stmtScores.reduce((a, b) => a + b, 0);
-            });
-            return scores;
+            if (score >= 7) return 'HEALTHY';
+            if (score >= 4) return 'NEEDS WORK';
+            return 'CRITICAL';
         }
 
         function calcAverage(arr) {
@@ -2063,337 +1777,196 @@
             return valid.length ? valid.reduce((a, b) => a + b, 0) / valid.length : 0;
         }
 
-        // Render 15 Statement Cards
-        function renderStatements() {
-            const container = document.getElementById('statements-container');
-            if (!container) return;
-            
-            container.innerHTML = STATEMENTS.map(stmt => {
-                const currentRating = assessment.responses[stmt.id] || 0;
-                const isComplete = currentRating > 0;
-                
-                return `
-                    <div class="statement-card ${isComplete ? 'completed' : ''}" id="statement-card-${stmt.id}">
-                        <!-- Header with number + hint question (no dysfunction label) -->
-                        <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
-                            <div class="statement-number">${stmt.id}</div>
-                            <div style="flex: 1;">
-                                <div style="font-size: 14px; color: var(--grey-600); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
-                                    <span class="icon icon-md" style="color: var(--yellow-600);"><i data-lucide="lightbulb"></i></span>
-                                    ${stmt.hint}
-                                </div>
-                                <div style="font-size: 18px; line-height: 1.6; color: var(--grey-900); font-weight: 500;">
-                                    ${stmt.text}
-                                </div>
-                            </div>
-                            ${isComplete ? '<span class="icon icon-sm" style="color: var(--green); flex-shrink: 0;"><i data-lucide="check-circle"></i></span>' : ''}
+        // Team Members
+        function renderTeamMembers() {
+            const container = document.getElementById('team-members-container');
+            container.innerHTML = teamMembers.map((member, i) => `
+                <div class="team-member-card">
+                    <div class="team-member-header">
+                        <div class="member-number">${i + 1}</div>
+                        <div class="member-inputs">
+                            <input type="text" placeholder="Team member name (e.g., John Peterson)" value="${member.name}" onchange="updateMember(${i}, 'name', this.value)">
+                            <input type="text" placeholder="Role (e.g., COO, CFO)" value="${member.role}" onchange="updateMember(${i}, 'role', this.value)">
                         </div>
-                        
-                        <!-- Rating buttons WITHOUT numbers -->
-                        <div class="rating-buttons">
-                            <button class="rating-btn ${currentRating === 1 ? 'active rating-bad' : ''}" onclick="rateStatement(${stmt.id}, 1)">
-                                <span class="rating-label-only">Rarely</span>
-                            </button>
-                            <button class="rating-btn ${currentRating === 2 ? 'active rating-moderate' : ''}" onclick="rateStatement(${stmt.id}, 2)">
-                                <span class="rating-label-only">Sometimes</span>
-                            </button>
-                            <button class="rating-btn ${currentRating === 3 ? 'active rating-good' : ''}" onclick="rateStatement(${stmt.id}, 3)">
-                                <span class="rating-label-only">Usually</span>
-                            </button>
-                        </div>
+                        ${isMemberComplete(member) ? '<span class="complete-badge"><i data-lucide="check" style="width:14px;height:14px;"></i> Complete</span>' : ''}
                     </div>
-                `;
-            }).join('');
+                    <div class="sliders-grid">
+                        ${DYSFUNCTIONS.map(d => `
+                            <div class="slider-container">
+                                <div class="slider-label">
+                                    <span>${d.shortName}</span>
+                                    <span class="slider-score ${member.ratings[d.id] > 0 ? getStatus(member.ratings[d.id]) : ''}">${member.ratings[d.id] || '-'}</span>
+                                </div>
+                                <input type="range" min="1" max="9" value="${member.ratings[d.id] || 5}" oninput="updateRating(${i}, '${d.id}', this.value)">
+                                <div class="slider-hint">${getSliderHint(member.ratings[d.id])}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
             
+            document.getElementById('add-member-btn').innerHTML = `<span class="icon icon-sm"><i data-lucide="plus"></i></span> Add Team Member (${teamMembers.length}/8)`;
+            document.getElementById('add-member-btn').disabled = teamMembers.length >= 8;
             lucide.createIcons();
         }
 
-        function rateStatement(statementId, rating) {
-            assessment.responses[statementId] = rating;
-            
-            // Flash animation
-            const card = document.getElementById(`statement-card-${statementId}`);
-            if (card) {
-                card.style.background = 'var(--yellow-100)';
-                setTimeout(() => {
-                    card.style.background = '';
-                    card.classList.add('completed');
-                }, 200);
-            }
-            
-            renderStatements();
+        function getSliderHint(score) {
+            if (!score || score === 0) return '';
+            if (score <= 3) return 'Critical - major dysfunction';
+            if (score <= 6) return 'Moderate - needs attention';
+            return 'Healthy - well functioning';
+        }
+
+        function isMemberComplete(member) {
+            return member.name.trim() && Object.values(member.ratings).every(r => r > 0);
+        }
+
+        function updateMember(index, field, value) {
+            teamMembers[index][field] = value;
+            renderTeamMembers();
             updateProgress();
-            showToast();
         }
 
-        function showToast() {
-            const completed = Object.values(assessment.responses).filter(r => r > 0).length;
-            const assessorName = document.getElementById('assessor-name')?.value.trim();
-            
-            if (completed === 15 && assessorName) {
-                // Show completion toast
-                const toast = document.createElement('div');
-                toast.className = 'toast';
-                toast.innerHTML = '🏆 Assessment Complete! +25 SAP';
-                toast.style.cssText = 'position:fixed;top:80px;right:24px;background:var(--green);color:white;padding:16px 24px;border-radius:4px;z-index:1000;font-weight:600;animation:slideIn 0.3s ease;';
-                document.body.appendChild(toast);
-                setTimeout(() => toast.remove(), 3000);
+        function updateRating(index, dysfunctionId, value) {
+            teamMembers[index].ratings[dysfunctionId] = parseInt(value);
+            renderTeamMembers();
+            updateProgress();
+        }
+
+        function addTeamMember() {
+            if (teamMembers.length < 8) {
+                teamMembers.push({ name: '', role: '', ratings: { trust: 0, conflict: 0, commitment: 0, accountability: 0, results: 0 } });
+                renderTeamMembers();
+                updateProgress();
             }
-        }
-
-        function isAssessmentComplete() {
-            const completed = Object.values(assessment.responses).filter(r => r > 0).length;
-            const assessorName = document.getElementById('assessor-name')?.value.trim();
-            return completed === 15 && assessorName;
         }
 
         // Progress
         function updateProgress() {
-            const completed = Object.values(assessment.responses).filter(r => r > 0).length;
-            const assessorName = document.getElementById('assessor-name')?.value.trim();
-            const assessmentComplete = completed === 15 && assessorName;
+            const named = teamMembers.filter(m => m.name.trim()).length;
+            const complete = teamMembers.filter(m => isMemberComplete(m)).length;
+            const totalRatings = teamMembers.reduce((acc, m) => acc + Object.values(m.ratings).filter(r => r > 0).length, 0);
+            const expectedRatings = named * 5;
             
-            // Update progress display
-            const statementsCount = document.getElementById('statements-count');
-            const completionPct = document.getElementById('completion-pct');
-            const sapProgress = document.getElementById('sap-progress');
-            const assessmentStatus = document.getElementById('assessment-status');
+            document.getElementById('named-count').textContent = `${named}/5+`;
+            document.getElementById('ratings-count').textContent = `${totalRatings}/${expectedRatings || 0}`;
+            document.getElementById('complete-count').textContent = `${complete}/${teamMembers.length}`;
             
-            if (statementsCount) statementsCount.textContent = `${completed}/15`;
-            if (completionPct) completionPct.textContent = `${Math.round((completed/15)*100)}%`;
-            if (sapProgress) sapProgress.textContent = `+${assessmentComplete ? 25 : 0}`;
-            if (assessmentStatus) {
-                assessmentStatus.textContent = assessmentComplete ? 'Complete!' : 'In Progress';
-                assessmentStatus.style.color = assessmentComplete ? 'var(--green)' : 'var(--amber)';
-            }
+            const tab2Complete = complete >= 5;
+            document.getElementById('status-text').textContent = tab2Complete ? 'Ready' : 'In Progress';
+            document.getElementById('status-text').style.color = tab2Complete ? 'var(--green)' : 'var(--amber)';
             
-            // Quick View with live scores
             const quickView = document.getElementById('quick-view');
             const quickItems = document.getElementById('quick-view-items');
-            const scores = calculateScores();
+            const averages = getTeamAverages();
             
-            if (quickView && quickItems && completed > 0) {
+            if (Object.values(averages).some(v => v > 0)) {
                 quickView.style.display = 'flex';
-                quickItems.innerHTML = DYSFUNCTIONS.map(d => {
-                    const hasAllStatements = d.statements.every(id => assessment.responses[id] > 0);
-                    if (!hasAllStatements) return '';
-                    return `
+                quickItems.innerHTML = DYSFUNCTIONS.map(d => 
+                    averages[d.id] > 0 ? `
                         <div class="quick-view-item">
                             <span>${d.shortName}</span>
-                            <span>${scores[d.id]}/9</span>
-                            <div class="traffic-light ${getStatus(scores[d.id])}"></div>
+                            <span>${averages[d.id].toFixed(1)}</span>
+                            <div class="traffic-light ${getStatus(averages[d.id])}"></div>
                         </div>
-                    `;
-                }).join('');
-            } else if (quickView) {
+                    ` : ''
+                ).join('');
+            } else {
                 quickView.style.display = 'none';
             }
             
-            // Tab: Your Scores - unlocks when assessment complete
-            const scoresTab = document.getElementById('tab-scores');
-            const viewScoresBtn = document.getElementById('view-scores-btn');
-            if (scoresTab) {
-                scoresTab.disabled = !assessmentComplete;
-                scoresTab.innerHTML = assessmentComplete 
-                    ? '<span class="icon icon-sm"><i data-lucide="check-circle"></i></span> Your Scores'
-                    : '<span class="icon icon-sm"><i data-lucide="lock"></i></span> Your Scores';
-            }
-            if (viewScoresBtn) viewScoresBtn.disabled = !assessmentComplete;
+            document.getElementById('tab-action').disabled = !tab2Complete;
+            document.getElementById('tab-action').innerHTML = tab2Complete 
+                ? '<span class="icon icon-sm"><i data-lucide="check-circle"></i></span> Action Plan'
+                : '<span class="icon icon-sm"><i data-lucide="lock"></i></span> Action Plan';
+            document.getElementById('continue-action-btn').disabled = !tab2Complete;
             
-            // Tab: Action Plan - unlocks when scores viewed
-            const actionTab = document.getElementById('tab-action');
-            if (actionTab) {
-                actionTab.disabled = !assessment.scoresViewed;
-                actionTab.innerHTML = assessment.scoresViewed 
-                    ? '<span class="icon icon-sm"><i data-lucide="check-circle"></i></span> Action Plan'
-                    : '<span class="icon icon-sm"><i data-lucide="lock"></i></span> Action Plan';
-            }
+            const tab3Complete = checkTab3Complete();
+            document.getElementById('tab-dashboard').disabled = !tab3Complete;
+            document.getElementById('tab-dashboard').innerHTML = tab3Complete 
+                ? '<span class="icon icon-sm"><i data-lucide="check-circle"></i></span> Dashboard'
+                : '<span class="icon icon-sm"><i data-lucide="lock"></i></span> Dashboard';
+            document.getElementById('view-dashboard-btn').disabled = !tab3Complete;
             
-            // Tab: Dashboard - unlocks when commitment signed
-            const dashboardComplete = checkDashboardComplete();
-            const dashboardTab = document.getElementById('tab-dashboard');
-            const viewDashboardBtn = document.getElementById('view-dashboard-btn');
-            if (dashboardTab) {
-                dashboardTab.disabled = !dashboardComplete;
-                dashboardTab.innerHTML = dashboardComplete 
-                    ? '<span class="icon icon-sm"><i data-lucide="check-circle"></i></span> Dashboard'
-                    : '<span class="icon icon-sm"><i data-lucide="lock"></i></span> Dashboard';
-            }
-            if (viewDashboardBtn) viewDashboardBtn.disabled = !dashboardComplete;
-            
-            // SAP Display
             const sap = calculateSAP();
-            const sapCount = document.getElementById('sap-count');
-            if (sapCount) sapCount.textContent = `${sap} SAP`;
+            document.getElementById('sap-count').textContent = `${sap} SAP`;
             
             lucide.createIcons();
         }
 
-        function checkDashboardComplete() {
-            // Must complete at least the top 3 priority actions (or all if less than 3)
-            const minRequired = Math.min(3, actions.length);
-            const topActions = actions.slice(0, minRequired);
-            const topActionsComplete = topActions.length >= minRequired && topActions.every(a => 
-                a.action && a.owner && a.frequency && a.startDate && a.successMetric
-            );
+        function getTeamAverages() {
+            const averages = {};
+            DYSFUNCTIONS.forEach(d => {
+                const scores = teamMembers.filter(m => m.name && m.ratings[d.id] > 0).map(m => m.ratings[d.id]);
+                averages[d.id] = scores.length ? calcAverage(scores) : 0;
+            });
+            return averages;
+        }
+
+        function checkTab3Complete() {
+            // Only check actions that have been assigned a dysfunction (i.e., based on actual priorities)
+            const assignedActions = actions.filter(a => a.dysfunctionId);
+            const actionsComplete = assignedActions.length > 0 && assignedActions.every(a => a.action && a.owner && a.frequency && a.startDate && a.successMetric);
             const commitmentComplete = document.getElementById('binding-commitment')?.checked && document.getElementById('signature')?.value.trim();
-            return topActionsComplete && commitmentComplete;
+            return actionsComplete && commitmentComplete;
         }
 
         function calculateSAP() {
             let sap = 0;
-            // Assessment complete: +25
-            if (isAssessmentComplete()) sap += 25;
-            // Each action complete: +25 (max 75)
+            const complete = teamMembers.filter(m => isMemberComplete(m)).length;
+            if (complete >= 5) sap += 50;
             actions.forEach(a => {
                 if (a.action && a.owner && a.frequency && a.startDate && a.successMetric) sap += 25;
             });
-            // Commitment signed: +25
             if (document.getElementById('binding-commitment')?.checked && document.getElementById('signature')?.value.trim()) sap += 25;
             return sap;
         }
 
-        // Render Your Scores Tab
-        function renderScoresTab() {
-            const scores = calculateScores();
-            const sorted = Object.entries(scores)
-                .map(([id, score]) => ({
-                    ...DYSFUNCTIONS.find(d => d.id === id),
-                    score
-                }))
-                .sort((a, b) => a.score - b.score); // Lowest first (worst problems)
-            
-            const container = document.getElementById('dysfunction-scores-grid');
-            if (!container) return;
-            
-            container.innerHTML = sorted.map((d, index) => `
-                <div class="dysfunction-score-card ${getStatus(d.score)}">
-                    <div class="dysfunction-score-header">
-                        <div class="priority-badge">${index < 3 ? 'Priority #' + (index + 1) : ''}</div>
-                        <div class="status-badge-lg ${getStatus(d.score)}">${getStatusLabel(d.score)}</div>
-                    </div>
-                    
-                    <h3 style="margin: 16px 0;">${d.name}</h3>
-                    
-                    <div class="score-display">
-                        <span class="score-value">${d.score}</span>
-                        <span class="score-max">/9</span>
-                    </div>
-                    
-                    <div class="score-breakdown">
-                        <h5>Based on your ratings:</h5>
-                        ${d.statements.map(stmtId => {
-                            const stmt = STATEMENTS.find(s => s.id === stmtId);
-                            const rating = assessment.responses[stmtId];
-                            return `
-                                <div class="statement-score-item">
-                                    <span>Statement ${stmtId}</span>
-                                    <span class="rating-${getRatingStatus(rating)}">${getRatingLabel(rating)} (${rating})</span>
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                    
-                    ${index < 3 ? `
-                        <div class="action-preview">
-                            <span class="icon icon-sm"><i data-lucide="target"></i></span>
-                            This will be one of your top 3 action areas
-                        </div>
-                    ` : ''}
-                </div>
-            `).join('');
-            
-            lucide.createIcons();
-        }
-
         // Action Tab
         function renderActionTab() {
-            const scores = calculateScores();
+            const averages = getTeamAverages();
             const priorities = DYSFUNCTIONS
-                .map(d => ({ ...d, score: scores[d.id] }))
+                .map(d => ({ ...d, score: averages[d.id] }))
                 .filter(d => d.score > 0)
-                .sort((a, b) => a.score - b.score) // Lowest first (worst problems)
+                .sort((a, b) => a.score - b.score)
                 .slice(0, 3);
             
             document.getElementById('priority-cards').innerHTML = priorities.map((p, i) => `
                 <div class="priority-card ${getStatus(p.score)}">
                     <div class="priority-rank">#${i + 1}</div>
                     <div class="priority-name">${p.name}</div>
-                    <div class="priority-score">${p.score}/9</div>
+                    <div class="priority-score">${p.score.toFixed(1)}</div>
                     <div class="priority-status">${getStatusLabel(p.score)}</div>
                 </div>
             `).join('') || '<p style="text-align:center; padding:40px; color:var(--grey-500); grid-column: 1/-1;">Complete assessment to see priorities</p>';
             
-            // Build owners list from assessor + generic team roles
-            const assessorName = document.getElementById('assessor-name')?.value || 'Team Member';
+            const owners = teamMembers.filter(m => m.name).map(m => `${m.name} - ${m.role}`);
             const ceoName = document.getElementById('ceo-name')?.value || 'CEO';
-            const owners = [
-                `${ceoName} - CEO`,
-                `${assessorName} - Assessor`,
-                'Team Lead - Operations',
-                'Team Lead - Finance', 
-                'Team Lead - Technology',
-                'Team Lead - Marketing'
-            ];
+            owners.unshift(`${ceoName} - CEO`);
             
-            // Ensure we have at least 3 action slots for priorities
-            while (actions.length < Math.min(3, priorities.length)) {
-                actions.push({});
-            }
-            
-            // Set dysfunction IDs for priority actions
-            priorities.forEach((p, i) => {
-                if (actions[i]) actions[i].dysfunctionId = p.id;
-            });
-            
-            // Render all action cards (priority + additional)
-            document.getElementById('action-cards-container').innerHTML = actions.map((action, i) => {
-                const isPriority = i < priorities.length;
-                const priority = isPriority ? priorities[i] : null;
-                const dysfunction = priority || (action.dysfunctionId ? DYSFUNCTIONS.find(d => d.id === action.dysfunctionId) : null);
-                
+            document.getElementById('action-cards-container').innerHTML = priorities.map((p, i) => {
+                actions[i] = actions[i] || {};
+                actions[i].dysfunctionId = p.id;
                 return `
                     <div class="action-card">
                         <div class="action-card-header">
-                            <span><strong>Action #${i + 1}:</strong> ${dysfunction ? dysfunction.name : 'Additional Action'}</span>
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                ${!isPriority ? `<button onclick="removeAction(${i})" style="background: none; border: none; cursor: pointer; color: var(--grey-400); padding: 4px;"><span class="icon icon-sm"><i data-lucide="x"></i></span></button>` : ''}
-                                <span style="padding:4px 12px; border-radius:4px; font-size:11px; font-weight:600; background:${isActionComplete(i) ? 'var(--green)' : 'var(--grey-200)'}; color:${isActionComplete(i) ? 'white' : 'var(--grey-600)'};">
-                                    ${isActionComplete(i) ? 'Complete' : 'Incomplete'}
-                                </span>
-                            </div>
+                            <span><strong>Action #${i + 1}:</strong> ${p.name}</span>
+                            <span style="padding:4px 12px; border-radius:4px; font-size:11px; font-weight:600; background:${isActionComplete(i) ? 'var(--green)' : 'var(--grey-200)'}; color:${isActionComplete(i) ? 'white' : 'var(--grey-600)'};">
+                                ${isActionComplete(i) ? 'Complete' : 'Incomplete'}
+                            </span>
                         </div>
                         <div class="action-card-body">
-                            ${dysfunction ? `
-                                <div class="action-hint">
-                                    <span class="icon icon-sm"><i data-lucide="book-open"></i></span>
-                                    <span><strong>BRAIN JUICE:</strong> As a team, decide on specific actions to address ${dysfunction.name.toLowerCase()}. Use the framework you learned to guide your discussion.</span>
-                                </div>
-                            ` : ''}
-                            
-                            ${!isPriority ? `
-                                <div class="form-group">
-                                    <label>Focus Area (Optional)</label>
-                                    <select onchange="updateAction(${i}, 'dysfunctionId', this.value)">
-                                        <option value="">General / Multiple areas</option>
-                                        ${DYSFUNCTIONS.map(d => `<option value="${d.id}" ${action.dysfunctionId === d.id ? 'selected' : ''}>${d.name}</option>`).join('')}
-                                    </select>
-                                </div>
-                            ` : ''}
+                            <div class="action-hint">
+                                <span class="icon icon-sm"><i data-lucide="book-open"></i></span>
+                                <span><strong>BRAIN JUICE:</strong> Focus on ${p.name.toLowerCase()} by implementing proven strategies from your learning.</span>
+                            </div>
                             
                             <div class="form-group">
                                 <label>Your Specific Action</label>
-                                <textarea 
-                                    placeholder="Describe the specific action your team will take..."
-                                    onchange="updateAction(${i}, 'action', this.value)"
-                                    oninput="updateAction(${i}, 'action', this.value)"
-                                    style="min-height: 80px; resize: vertical;">${action.action || ''}</textarea>
-                                ${dysfunction && BRAIN_JUICE_ACTIONS[dysfunction.id] ? `
-                                    <div style="font-size: 12px; color: var(--grey-500); margin-top: 6px; display: flex; align-items: flex-start; gap: 6px;">
-                                        <span class="icon icon-sm" style="color: var(--yellow-600); flex-shrink: 0;"><i data-lucide="lightbulb"></i></span>
-                                        <span>Suggested: ${BRAIN_JUICE_ACTIONS[dysfunction.id].slice(0, 2).join(' | ')}</span>
-                                    </div>
-                                ` : ''}
+                                <select onchange="updateAction(${i}, 'action', this.value)">
+                                    <option value="">Select a Brain Juice recommended action...</option>
+                                    ${BRAIN_JUICE_ACTIONS[p.id].map(opt => `<option value="${opt}" ${actions[i].action === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+                                </select>
                             </div>
                             
                             <div class="action-fields">
@@ -2401,44 +1974,33 @@
                                     <label>Led by</label>
                                     <select onchange="updateAction(${i}, 'owner', this.value)">
                                         <option value="">Select owner...</option>
-                                        ${owners.map(o => `<option value="${o}" ${action.owner === o ? 'selected' : ''}>${o}</option>`).join('')}
+                                        ${owners.map(o => `<option value="${o}" ${actions[i].owner === o ? 'selected' : ''}>${o}</option>`).join('')}
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Frequency</label>
                                     <select onchange="updateAction(${i}, 'frequency', this.value)">
                                         <option value="">Select...</option>
-                                        <option value="daily" ${action.frequency === 'daily' ? 'selected' : ''}>Daily</option>
-                                        <option value="weekly" ${action.frequency === 'weekly' ? 'selected' : ''}>Weekly</option>
-                                        <option value="bi-weekly" ${action.frequency === 'bi-weekly' ? 'selected' : ''}>Bi-weekly</option>
-                                        <option value="monthly" ${action.frequency === 'monthly' ? 'selected' : ''}>Monthly</option>
+                                        <option value="daily" ${actions[i].frequency === 'daily' ? 'selected' : ''}>Daily</option>
+                                        <option value="weekly" ${actions[i].frequency === 'weekly' ? 'selected' : ''}>Weekly</option>
+                                        <option value="bi-weekly" ${actions[i].frequency === 'bi-weekly' ? 'selected' : ''}>Bi-weekly</option>
+                                        <option value="monthly" ${actions[i].frequency === 'monthly' ? 'selected' : ''}>Monthly</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Starting</label>
-                                    <input type="date" value="${action.startDate || ''}" onchange="updateAction(${i}, 'startDate', this.value)">
+                                    <input type="date" value="${actions[i].startDate || ''}" onchange="updateAction(${i}, 'startDate', this.value)">
                                 </div>
                             </div>
                             
                             <div class="form-group" style="margin-bottom:0;">
                                 <label>Success Metric</label>
-                                <textarea placeholder="e.g., Team vulnerability index increases from 3.2 to 6.0 within 90 days" onchange="updateAction(${i}, 'successMetric', this.value)">${action.successMetric || ''}</textarea>
+                                <textarea placeholder="e.g., Team vulnerability index increases from 3.2 to 6.0 within 90 days" onchange="updateAction(${i}, 'successMetric', this.value)">${actions[i].successMetric || ''}</textarea>
                             </div>
                         </div>
                     </div>
                 `;
             }).join('');
-            
-            // Add "Add Another Action" button
-            const addBtnContainer = document.getElementById('add-action-btn-container');
-            if (addBtnContainer) {
-                addBtnContainer.innerHTML = actions.length < 7 ? `
-                    <button class="btn btn-secondary" onclick="addAction()" style="width: 100%;">
-                        <span class="icon icon-sm"><i data-lucide="plus"></i></span>
-                        Add Another Action (${actions.length}/7 maximum)
-                    </button>
-                ` : `<p style="text-align: center; color: var(--grey-500); font-size: 13px;">Maximum 7 actions reached</p>`;
-            }
             
             if (actions[0]?.startDate) {
                 document.getElementById('first-action-date').textContent = actions[0].startDate;
@@ -2505,31 +2067,6 @@
             return a && a.action && a.owner && a.frequency && a.startDate && a.successMetric;
         }
 
-        function addAction() {
-            if (actions.length < 7) {
-                actions.push({
-                    dysfunctionId: '',
-                    action: '',
-                    owner: '',
-                    frequency: '',
-                    startDate: '',
-                    successMetric: ''
-                });
-                renderActionTab();
-                lucide.createIcons();
-            }
-        }
-
-        function removeAction(index) {
-            // Only allow removing non-priority actions (index >= 3)
-            if (index >= 3 && actions.length > 3) {
-                actions.splice(index, 1);
-                renderActionTab();
-                updateProgress();
-                lucide.createIcons();
-            }
-        }
-
         function updateAction(index, field, value) {
             actions[index][field] = value;
             if (field === 'startDate' && index === 0) {
@@ -2541,12 +2078,11 @@
 
         // Dashboard
         function renderDashboard() {
-            const scores = calculateScores();
-            const totalScore = Object.values(scores).reduce((a, b) => a + b, 0);
-            const overallScore = totalScore / 5; // Average of 5 dysfunctions
-            const criticalCount = DYSFUNCTIONS.filter(d => scores[d.id] < 6).length;
+            const averages = getTeamAverages();
+            const overallScore = calcAverage(Object.values(averages).filter(v => v > 0));
+            const criticalCount = DYSFUNCTIONS.filter(d => averages[d.id] > 0 && averages[d.id] < 4).length;
             const sap = calculateSAP();
-            const actionsCount = actions.filter((a, i) => isActionComplete(i)).length;
+            const actionsCount = actions.filter(a => isActionComplete(actions.indexOf(a))).length;
             
             document.getElementById('overall-score').textContent = overallScore.toFixed(1);
             document.getElementById('critical-count').textContent = criticalCount;
@@ -2563,23 +2099,25 @@
             document.getElementById('mastery-progress').style.width = `${progress}%`;
             document.getElementById('mastery-next').textContent = `${nextLevelSAP - sap} more SAP needed for ${masteryLevel === 'NOVICE' ? 'PRACTITIONER' : 'MASTER'} level`;
             
-            // Heat map shows YOUR scores (single row)
             const heatMapBody = document.getElementById('heat-map-body');
-            const assessorName = document.getElementById('assessor-name')?.value || 'You';
-            const assessorRole = document.getElementById('assessor-role')?.value || 'Team Member';
-            heatMapBody.innerHTML = `
+            heatMapBody.innerHTML = teamMembers.filter(m => m.name).map(m => `
                 <tr>
-                    <td>${assessorName}</td>
-                    <td>${assessorRole}</td>
-                    ${DYSFUNCTIONS.map(d => `<td><span class="heat-cell ${getStatus(scores[d.id])}">${scores[d.id]}/9</span></td>`).join('')}
+                    <td>${m.name}</td>
+                    <td>${m.role}</td>
+                    ${DYSFUNCTIONS.map(d => `<td><span class="heat-cell ${getStatus(m.ratings[d.id])}">${m.ratings[d.id] || '-'}</span></td>`).join('')}
+                </tr>
+            `).join('') + `
+                <tr>
+                    <td colspan="2">Team Average</td>
+                    ${DYSFUNCTIONS.map(d => `<td><span class="heat-cell ${getStatus(averages[d.id])}">${averages[d.id] ? averages[d.id].toFixed(1) : '-'}</span></td>`).join('')}
                 </tr>
             `;
             
-            document.getElementById('chart-bars').innerHTML = DYSFUNCTIONS.map(d => `
+            document.getElementById('chart-bars').innerHTML = DYSFUNCTIONS.filter(d => averages[d.id] > 0).map(d => `
                 <div class="chart-bar-item">
                     <div class="chart-bar-label">${d.shortName}</div>
                     <div class="chart-bar-track">
-                        <div class="chart-bar-fill ${getStatus(scores[d.id])}" style="width: ${(scores[d.id] / 9) * 100}%">${scores[d.id]}/9</div>
+                        <div class="chart-bar-fill ${getStatus(averages[d.id])}" style="width: ${(averages[d.id] / 9) * 100}%">${averages[d.id].toFixed(1)}</div>
                     </div>
                 </div>
             `).join('');
@@ -2613,24 +2151,20 @@
             lucide.createIcons();
         }
 
-        // Load Example Assessment
+        // Load Example
         function loadExample() {
-            assessment.assessorName = EXAMPLE_ASSESSMENT.assessorName;
-            assessment.assessorRole = EXAMPLE_ASSESSMENT.assessorRole;
-            assessment.responses = { ...EXAMPLE_ASSESSMENT.responses };
-            
-            document.getElementById('assessor-name').value = EXAMPLE_ASSESSMENT.assessorName;
-            document.getElementById('assessor-role').value = EXAMPLE_ASSESSMENT.assessorRole;
-            
-            renderStatements();
+            teamMembers = EXAMPLE_DATA.teamMembers.map(m => ({ ...m }));
+            document.getElementById('ceo-name').value = EXAMPLE_DATA.ceoName;
+            document.getElementById('company-name').value = EXAMPLE_DATA.companyName;
+            renderTeamMembers();
             updateProgress();
         }
         
         function loadExampleAndHide() {
             loadExample();
             hideExamplePrompt();
-            // Scroll to first statement card
-            const firstCard = document.querySelector('.statement-card');
+            // Scroll to first team member card
+            const firstCard = document.querySelector('.team-member-card');
             if (firstCard) {
                 setTimeout(() => {
                     firstCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -2652,7 +2186,7 @@
 
         // Copy Link
         function copyLink() {
-            const data = { assessment, actions };
+            const data = { teamMembers, actions };
             const encoded = btoa(JSON.stringify(data));
             navigator.clipboard.writeText(`${window.location.href}#data=${encoded}`).then(() => {
                 alert('Assessment link copied! Share with your Guru or Forum peers.');
