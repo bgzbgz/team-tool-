@@ -1816,6 +1816,314 @@
         .chart-bar-fill.moderate { background: var(--amber); }
         .chart-bar-fill.critical { background: var(--red); }
         
+        /* Guru Mode */
+        .guru-login-btn {
+            background: transparent;
+            border: 1px solid var(--grey-600);
+            color: var(--grey-400);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        
+        .guru-login-btn:hover {
+            border-color: var(--yellow-400);
+            color: var(--yellow-400);
+        }
+        
+        .guru-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        
+        .guru-modal.active {
+            display: flex;
+        }
+        
+        .guru-modal-content {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 40px;
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .guru-modal-content h2 {
+            margin-bottom: 12px;
+        }
+        
+        .guru-modal-content p {
+            color: var(--grey-600);
+            margin-bottom: 24px;
+        }
+        
+        .guru-code-input {
+            width: 100%;
+            padding: 16px;
+            font-size: 18px;
+            text-align: center;
+            border: 2px solid var(--grey-300);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-family: monospace;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .guru-code-input:focus {
+            outline: none;
+            border-color: var(--yellow-400);
+        }
+        
+        .guru-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--white);
+            z-index: 1500;
+            display: none;
+            overflow-y: auto;
+        }
+        
+        .guru-fullscreen.active {
+            display: block;
+        }
+        
+        .guru-header {
+            background: var(--grey-900);
+            color: white;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .guru-header h2 {
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .guru-header .icon { color: var(--yellow-400); }
+        
+        .guru-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        
+        .import-section {
+            background: var(--grey-50);
+            border: 2px dashed var(--grey-300);
+            border-radius: 8px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+        
+        .import-section h3 {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .import-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 16px;
+            border: 1px solid var(--grey-300);
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 13px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+        
+        .imported-list {
+            margin-top: 24px;
+        }
+        
+        .imported-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--white);
+            border: 1px solid var(--grey-200);
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        
+        .imported-item.success {
+            border-left: 4px solid var(--green);
+        }
+        
+        .imported-item .name {
+            font-weight: 600;
+        }
+        
+        .imported-item .role {
+            color: var(--grey-500);
+            font-size: 13px;
+        }
+        
+        .team-summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 32px;
+        }
+        
+        .team-summary-table th {
+            background: var(--grey-900);
+            color: white;
+            padding: 12px 16px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        
+        .team-summary-table th:first-child {
+            text-align: left;
+        }
+        
+        .team-summary-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--grey-200);
+            text-align: center;
+        }
+        
+        .team-summary-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .team-summary-table tr.average-row {
+            background: var(--yellow-50);
+            font-weight: 700;
+        }
+        
+        .team-summary-table tr.average-row td {
+            border-top: 2px solid var(--grey-900);
+        }
+        
+        .score-cell {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .score-cell.healthy { color: var(--green); }
+        .score-cell.moderate { color: var(--amber); }
+        .score-cell.critical { color: var(--red); }
+        
+        .variance-alert {
+            background: var(--yellow-50);
+            border: 1px solid var(--yellow-300);
+            border-left: 4px solid var(--amber);
+            padding: 16px 20px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+        
+        .variance-alert h4 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: var(--amber);
+        }
+        
+        .variance-alert p {
+            color: var(--grey-700);
+            font-size: 14px;
+            margin: 0;
+        }
+        
+        .priorities-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        
+        .priority-summary-card {
+            padding: 24px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .priority-summary-card.critical {
+            background: var(--red);
+            color: white;
+        }
+        
+        .priority-summary-card.moderate {
+            background: var(--amber);
+            color: white;
+        }
+        
+        .priority-summary-card h4 {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+        
+        .priority-summary-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .priority-summary-card .score {
+            font-size: 32px;
+            font-weight: 900;
+        }
+        
+        .submission-code-card {
+            background: var(--grey-900);
+            color: white;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 24px 0;
+        }
+        
+        .submission-code-card h4 {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .submission-code-card .code-display {
+            background: var(--grey-800);
+            padding: 16px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            word-break: break-all;
+            margin-bottom: 16px;
+            max-height: 80px;
+            overflow-y: auto;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .header-content { flex-wrap: wrap; }
@@ -1850,11 +2158,110 @@
                     <span id="ftp-count">0 FTP</span>
                 </div>
             </div>
-            <div class="logo">
-                <img src="fast track tool logo.png" alt="Fast Track">
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <button class="guru-login-btn" onclick="openGuruModal()">
+                    <span class="icon icon-sm"><i data-lucide="key"></i></span>
+                    Guru Login
+                </button>
+                <div class="logo">
+                    <img src="fast track tool logo.png" alt="Fast Track">
+                </div>
             </div>
         </div>
     </header>
+    
+    <!-- Guru Login Modal -->
+    <div class="guru-modal" id="guru-modal">
+        <div class="guru-modal-content">
+            <h2>🔑 Guru Mode</h2>
+            <p>Enter your sprint code to access the Team Summary dashboard</p>
+            <input type="text" class="guru-code-input" id="guru-code-input" placeholder="SPRINT CODE" maxlength="20">
+            <div id="guru-code-error" style="color: var(--red); font-size: 13px; margin-bottom: 16px; display: none;">
+                Invalid code. Please try again.
+            </div>
+            <div style="display: flex; gap: 12px; justify-content: center;">
+                <button class="btn btn-secondary" onclick="closeGuruModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="validateGuruCode()">
+                    <span class="icon icon-sm"><i data-lucide="unlock"></i></span>
+                    Unlock
+                </button>
+            </div>
+            <p style="margin-top: 20px; font-size: 12px; color: var(--grey-500);">
+                Get your sprint code from Fast Track
+            </p>
+        </div>
+    </div>
+    
+    <!-- Guru Mode Fullscreen -->
+    <div class="guru-fullscreen" id="guru-fullscreen">
+        <div class="guru-header">
+            <h2>
+                <span class="icon icon-md"><i data-lucide="users"></i></span>
+                Guru Mode - Team Summary
+            </h2>
+            <button class="btn btn-secondary" onclick="closeGuruMode()" style="background: transparent; border-color: var(--grey-600);">
+                <span class="icon icon-sm"><i data-lucide="x"></i></span>
+                Exit Guru Mode
+            </button>
+        </div>
+        <div class="guru-container">
+            <!-- Import Section -->
+            <div class="import-section" id="import-section">
+                <h3>
+                    <span class="icon icon-md"><i data-lucide="download"></i></span>
+                    Import Team Assessments
+                </h3>
+                <p style="color: var(--grey-600); margin-bottom: 20px;">
+                    Paste submission codes from team members below. Each code contains their complete assessment data.
+                </p>
+                <textarea class="import-textarea" id="import-code-input" placeholder="Paste a team member's submission code here..."></textarea>
+                <button class="btn btn-primary" onclick="importAssessment()">
+                    <span class="icon icon-sm"><i data-lucide="plus"></i></span>
+                    Import Assessment
+                </button>
+                
+                <div class="imported-list" id="imported-list">
+                    <h4 style="margin-bottom: 16px; color: var(--grey-600);">
+                        Imported Team Members (<span id="imported-count">0</span>/8)
+                    </h4>
+                    <div id="imported-members"></div>
+                </div>
+            </div>
+            
+            <!-- Team Summary (hidden until 2+ members imported) -->
+            <div id="team-summary-section" style="display: none;">
+                <h2 style="margin-bottom: 24px;">
+                    <span class="icon icon-md"><i data-lucide="bar-chart-2"></i></span>
+                    Team Dysfunction Summary
+                </h2>
+                
+                <!-- Top 3 Priorities -->
+                <div class="priorities-summary" id="team-priorities"></div>
+                
+                <!-- Variance Alerts -->
+                <div id="variance-alerts"></div>
+                
+                <!-- Full Table -->
+                <div class="card" style="padding: 0; overflow: hidden;">
+                    <table class="team-summary-table" id="team-summary-table">
+                        <!-- Generated by JavaScript -->
+                    </table>
+                </div>
+                
+                <!-- Export Options -->
+                <div style="display: flex; gap: 12px; margin-top: 24px;">
+                    <button class="btn btn-primary" onclick="window.print()">
+                        <span class="icon icon-sm"><i data-lucide="file-text"></i></span>
+                        Export PDF
+                    </button>
+                    <button class="btn btn-secondary" onclick="copyTeamSummary()">
+                        <span class="icon icon-sm"><i data-lucide="copy"></i></span>
+                        Copy Summary
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <!-- Tabs Navigation -->
@@ -2132,23 +2539,34 @@
                 </ol>
             </div>
 
+            <!-- Submission Code for Guru -->
+            <div class="submission-code-card">
+                <h4>
+                    <span class="icon icon-md"><i data-lucide="key"></i></span>
+                    Your Submission Code
+                </h4>
+                <p style="color: var(--grey-400); margin-bottom: 16px; font-size: 14px;">
+                    Send this code to your Guru so they can compile the team summary.
+                </p>
+                <div class="code-display" id="submission-code">
+                    <!-- Generated when scores tab is shown -->
+                </div>
+                <button class="btn btn-yellow" onclick="copySubmissionCode()" style="width: 100%;">
+                    <span class="icon icon-sm"><i data-lucide="copy"></i></span>
+                    Copy Code to Clipboard
+                </button>
+            </div>
+            
             <!-- Export Your Assessment -->
             <div class="card">
                 <h3>
                     <span class="icon icon-md"><i data-lucide="share-2"></i></span>
-                    Share Your Assessment
+                    Other Export Options
                 </h3>
-                <p style="color: var(--grey-600); margin-bottom: 20px;">
-                    Send your results to your Guru for compilation.
-                </p>
                 <div style="display: flex; gap: 12px;">
-                    <button class="btn btn-primary" onclick="window.print()">
+                    <button class="btn btn-secondary" onclick="window.print()">
                         <span class="icon icon-sm"><i data-lucide="file-text"></i></span>
                         Export PDF
-                    </button>
-                    <button class="btn btn-secondary" onclick="copyLink()">
-                        <span class="icon icon-sm"><i data-lucide="link"></i></span>
-                        Copy Link
                     </button>
                 </div>
             </div>
@@ -3150,6 +3568,9 @@
             `;
             
             lucide.createIcons();
+            
+            // Update submission code display
+            updateSubmissionCodeDisplay();
         }
 
         // Action Tab
@@ -3457,6 +3878,322 @@
                 alert('Assessment link copied! Share with your Guru or Forum peers.');
             });
         }
+
+        // ================================================
+        // GURU MODE FUNCTIONS
+        // ================================================
+        
+        const GURU_CODE = 'TEAM-SPRINT-05'; // Sprint-specific code
+        let teamAssessments = []; // Array to store imported team assessments
+        
+        function openGuruModal() {
+            document.getElementById('guru-modal').classList.add('active');
+            document.getElementById('guru-code-input').value = '';
+            document.getElementById('guru-code-error').style.display = 'none';
+            document.getElementById('guru-code-input').focus();
+        }
+        
+        function closeGuruModal() {
+            document.getElementById('guru-modal').classList.remove('active');
+        }
+        
+        function validateGuruCode() {
+            const input = document.getElementById('guru-code-input').value.trim().toUpperCase();
+            if (input === GURU_CODE) {
+                closeGuruModal();
+                openGuruMode();
+            } else {
+                document.getElementById('guru-code-error').style.display = 'block';
+                document.getElementById('guru-code-input').select();
+            }
+        }
+        
+        function openGuruMode() {
+            document.getElementById('guru-fullscreen').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            renderImportedList();
+            lucide.createIcons();
+        }
+        
+        function closeGuruMode() {
+            document.getElementById('guru-fullscreen').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Generate submission code from current assessment
+        function generateSubmissionCode() {
+            const scores = calculateScores();
+            const data = {
+                name: document.getElementById('assessor-name')?.value || 'Unknown',
+                role: document.getElementById('assessor-role')?.value || '',
+                timestamp: new Date().toISOString(),
+                scores: scores,
+                responses: assessment.responses
+            };
+            return btoa(JSON.stringify(data));
+        }
+        
+        function copySubmissionCode() {
+            const code = generateSubmissionCode();
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = event.target.closest('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span class="icon icon-sm"><i data-lucide="check"></i></span> Copied!';
+                btn.style.background = 'var(--green)';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                    lucide.createIcons();
+                }, 2000);
+            });
+        }
+        
+        // Update submission code display when scores tab is shown
+        function updateSubmissionCodeDisplay() {
+            const codeEl = document.getElementById('submission-code');
+            if (codeEl) {
+                codeEl.textContent = generateSubmissionCode();
+            }
+        }
+        
+        // Import assessment from code
+        function importAssessment() {
+            const input = document.getElementById('import-code-input');
+            const code = input.value.trim();
+            
+            if (!code) {
+                alert('Please paste a submission code');
+                return;
+            }
+            
+            try {
+                const data = JSON.parse(atob(code));
+                
+                // Validate data structure
+                if (!data.name || !data.scores) {
+                    throw new Error('Invalid code format');
+                }
+                
+                // Check for duplicate
+                if (teamAssessments.find(a => a.name === data.name)) {
+                    alert(`${data.name} has already been imported`);
+                    return;
+                }
+                
+                // Add to array
+                teamAssessments.push(data);
+                
+                // Clear input
+                input.value = '';
+                
+                // Update UI
+                renderImportedList();
+                
+                // Show summary if 2+ members
+                if (teamAssessments.length >= 2) {
+                    renderTeamSummary();
+                }
+                
+                // Show success feedback
+                showToastMessage(`✓ ${data.name} imported successfully`);
+                
+            } catch (e) {
+                alert('Invalid submission code. Please check and try again.');
+                console.error('Import error:', e);
+            }
+        }
+        
+        function removeImportedMember(index) {
+            teamAssessments.splice(index, 1);
+            renderImportedList();
+            if (teamAssessments.length >= 2) {
+                renderTeamSummary();
+            } else {
+                document.getElementById('team-summary-section').style.display = 'none';
+            }
+        }
+        
+        function renderImportedList() {
+            const container = document.getElementById('imported-members');
+            const countEl = document.getElementById('imported-count');
+            
+            countEl.textContent = teamAssessments.length;
+            
+            if (teamAssessments.length === 0) {
+                container.innerHTML = '<p style="color: var(--grey-500); font-style: italic;">No team members imported yet</p>';
+            } else {
+                container.innerHTML = teamAssessments.map((member, index) => `
+                    <div class="imported-item success">
+                        <div>
+                            <span class="name">${member.name}</span>
+                            ${member.role ? `<span class="role"> - ${member.role}</span>` : ''}
+                        </div>
+                        <button onclick="removeImportedMember(${index})" style="background: none; border: none; cursor: pointer; color: var(--grey-400);">
+                            <span class="icon icon-sm"><i data-lucide="x"></i></span>
+                        </button>
+                    </div>
+                `).join('');
+            }
+            
+            lucide.createIcons();
+        }
+        
+        function renderTeamSummary() {
+            if (teamAssessments.length < 2) return;
+            
+            document.getElementById('team-summary-section').style.display = 'block';
+            
+            // Calculate team averages
+            const teamAverages = {};
+            const varianceData = {};
+            
+            DYSFUNCTIONS.forEach(d => {
+                const scores = teamAssessments.map(a => a.scores[d.id] || 0);
+                const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
+                const min = Math.min(...scores);
+                const max = Math.max(...scores);
+                
+                teamAverages[d.id] = {
+                    avg: avg.toFixed(1),
+                    min: min,
+                    max: max,
+                    range: max - min,
+                    status: avg >= 8 ? 'healthy' : avg >= 6 ? 'moderate' : 'critical'
+                };
+                
+                varianceData[d.id] = { range: max - min, min, max };
+            });
+            
+            // Render priorities
+            const sorted = Object.entries(teamAverages)
+                .map(([id, data]) => ({ id, ...DYSFUNCTIONS.find(d => d.id === id), ...data }))
+                .sort((a, b) => parseFloat(a.avg) - parseFloat(b.avg));
+            
+            const prioritiesContainer = document.getElementById('team-priorities');
+            prioritiesContainer.innerHTML = sorted.slice(0, 3).map((d, i) => `
+                <div class="priority-summary-card ${d.status}">
+                    <h4>PRIORITY #${i + 1}</h4>
+                    <h3>${d.name}</h3>
+                    <div class="score">${d.avg}/9</div>
+                </div>
+            `).join('');
+            
+            // Render variance alerts
+            const alertsContainer = document.getElementById('variance-alerts');
+            const highVariance = Object.entries(varianceData)
+                .filter(([id, data]) => data.range >= 3)
+                .map(([id, data]) => ({ id, ...DYSFUNCTIONS.find(d => d.id === id), ...data }));
+            
+            if (highVariance.length > 0) {
+                alertsContainer.innerHTML = `
+                    <h3 style="margin-bottom: 16px;">
+                        <span class="icon icon-md"><i data-lucide="alert-triangle"></i></span>
+                        Variance Alerts
+                    </h3>
+                    ${highVariance.map(d => `
+                        <div class="variance-alert">
+                            <h4>
+                                <span class="icon icon-sm"><i data-lucide="alert-triangle"></i></span>
+                                High Variance: ${d.name}
+                            </h4>
+                            <p>
+                                Scores range from <strong>${d.min}</strong> to <strong>${d.max}</strong> (${d.range} point spread).
+                                This disagreement is worth discussing with the team.
+                            </p>
+                        </div>
+                    `).join('')}
+                `;
+            } else {
+                alertsContainer.innerHTML = '';
+            }
+            
+            // Render table
+            const table = document.getElementById('team-summary-table');
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Team Member</th>
+                        ${DYSFUNCTIONS.map(d => `<th>${d.shortName}</th>`).join('')}
+                    </tr>
+                </thead>
+                <tbody>
+                    ${teamAssessments.map(member => `
+                        <tr>
+                            <td>${member.name}${member.role ? ` <span style="color: var(--grey-500); font-weight: 400;">(${member.role})</span>` : ''}</td>
+                            ${DYSFUNCTIONS.map(d => {
+                                const score = member.scores[d.id] || 0;
+                                const status = score >= 8 ? 'healthy' : score >= 6 ? 'moderate' : 'critical';
+                                return `<td class="score-cell ${status}">${score}</td>`;
+                            }).join('')}
+                        </tr>
+                    `).join('')}
+                    <tr class="average-row">
+                        <td>TEAM AVERAGE</td>
+                        ${DYSFUNCTIONS.map(d => {
+                            const data = teamAverages[d.id];
+                            return `<td class="score-cell ${data.status}">${data.avg}</td>`;
+                        }).join('')}
+                    </tr>
+                </tbody>
+            `;
+            
+            lucide.createIcons();
+        }
+        
+        function copyTeamSummary() {
+            if (teamAssessments.length < 2) return;
+            
+            // Calculate averages
+            const teamAverages = {};
+            DYSFUNCTIONS.forEach(d => {
+                const scores = teamAssessments.map(a => a.scores[d.id] || 0);
+                teamAverages[d.id] = (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(1);
+            });
+            
+            // Build text summary
+            let summary = `TEAM DYSFUNCTION SUMMARY\n`;
+            summary += `Sprint 5 - ${teamAssessments.length} Team Members\n`;
+            summary += `${'='.repeat(50)}\n\n`;
+            
+            summary += `INDIVIDUAL SCORES:\n`;
+            summary += `-`.repeat(50) + `\n`;
+            teamAssessments.forEach(m => {
+                summary += `${m.name} (${m.role || 'N/A'}): `;
+                summary += DYSFUNCTIONS.map(d => `${d.shortName}: ${m.scores[d.id]}`).join(' | ');
+                summary += `\n`;
+            });
+            
+            summary += `\nTEAM AVERAGES:\n`;
+            summary += `-`.repeat(50) + `\n`;
+            DYSFUNCTIONS.forEach(d => {
+                const avg = teamAverages[d.id];
+                const status = avg >= 8 ? '✓ Healthy' : avg >= 6 ? '⚠ Moderate' : '✗ Critical';
+                summary += `${d.name}: ${avg}/9 - ${status}\n`;
+            });
+            
+            navigator.clipboard.writeText(summary).then(() => {
+                showToastMessage('✓ Summary copied to clipboard');
+            });
+        }
+        
+        function showToastMessage(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position:fixed;top:80px;right:24px;background:var(--green);color:white;padding:16px 24px;border-radius:4px;z-index:3000;font-weight:600;';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        }
+        
+        // Add keyboard support for Guru modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && document.getElementById('guru-modal').classList.contains('active')) {
+                validateGuruCode();
+            }
+            if (e.key === 'Escape') {
+                closeGuruModal();
+                closeGuruMode();
+            }
+        });
     </script>
 </body>
 </html>
