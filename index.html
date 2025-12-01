@@ -2000,43 +2000,32 @@
 
         <!-- TAB 4: ACTION PLAN -->
         <div id="action" class="tab-content">
-            <!-- Collaborative Process Note -->
-            <div class="card" style="background: var(--yellow-50); border-color: var(--yellow-300);">
-                <h4 style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                    <span class="icon icon-md" style="color: var(--yellow-600);"><i data-lucide="info"></i></span>
-                    Important: Collaborative Process
-                </h4>
+            <!-- Instructions -->
+            <div class="card" style="background: var(--grey-50);">
                 <p style="margin: 0; color: var(--grey-700); line-height: 1.7;">
-                    These priorities are based on YOUR assessment. During the Fast Track hour, your Guru will present 
-                    COMPILED results from all team members, and the TEAM will collectively decide on the final 3 
-                    priorities and action plan.
+                    With the scores at hand, initiate an open and honest discussion within the team (during the Fast Track hour). 
+                    Talk about the areas of strength, acknowledge the challenges, and collectively brainstorm on actionable steps to overcome the dysfunctions. 
+                    In the end, choose the most important <strong>3 action points</strong> you want to implement first.
                 </p>
             </div>
 
-            <div class="card card-yellow">
-                <h3>
-                    <span class="icon icon-md"><i data-lucide="target"></i></span>
-                    Team's Top 3 Priority Areas
+            <!-- ALL 5 Dysfunctions Table -->
+            <div class="card">
+                <h3 style="margin-bottom: 20px;">
+                    <span class="icon icon-md"><i data-lucide="bar-chart-2"></i></span>
+                    Team Dysfunction Scores
                 </h3>
-                <p style="color: var(--grey-600); margin-bottom: 24px; margin-top: -16px; font-size: 13px;">Based on team's collective assessment. Complete these actions during your Fast Track hour.</p>
-                <div class="priority-cards" id="priority-cards"></div>
+                <div id="dysfunction-action-table"></div>
             </div>
 
-            <div id="action-cards-container"></div>
-
-            <!-- Add Another Action Button -->
-            <div id="add-action-btn-container" style="margin-bottom: 24px;"></div>
-
-            <!-- Actions incomplete message -->
-            <div id="actions-incomplete-msg" class="card" style="text-align: center; padding: 48px 32px; background: var(--grey-50); border: 2px dashed var(--grey-300);">
-                <span class="icon icon-lg" style="color: var(--grey-400); margin-bottom: 16px;"><i data-lucide="clipboard-list"></i></span>
-                <h4 style="margin-bottom: 8px; color: var(--grey-600);">Complete Your Action Plans</h4>
-                <p style="color: var(--grey-500); margin-bottom: 0;">Fill out all 3 action cards above to unlock the commitment section</p>
-                <div id="actions-progress" style="margin-top: 16px; display: flex; gap: 8px; justify-content: center;">
-                    <span class="action-dot"></span>
-                    <span class="action-dot"></span>
-                    <span class="action-dot"></span>
-                </div>
+            <!-- 3 Action Items (What/Who/When) -->
+            <div class="card">
+                <h3 style="margin-bottom: 20px;">
+                    <span class="icon icon-md"><i data-lucide="target"></i></span>
+                    3 Priority Actions
+                </h3>
+                <p style="color: var(--grey-600); margin-bottom: 24px; font-size: 13px;">Choose 3 actions to implement. Assign a responsible person and deadline.</p>
+                <div id="www-actions-container"></div>
             </div>
 
             <div class="commitment-section" id="commitment-section" style="display: none;">
@@ -2339,7 +2328,12 @@
             responses: {},
             scoresViewed: false
         };
-        let actions = [{}, {}, {}];
+        let actions = [
+            { what: '', who: '', when: '' },
+            { what: '', who: '', when: '' },
+            { what: '', who: '', when: '' }
+        ];
+        let dysfunctionNotes = {};
         let currentTab = 'reference';
 
         // Initialize
@@ -2890,14 +2884,10 @@
         }
 
         function checkDashboardComplete() {
-            // Must complete at least the top 3 priority actions (or all if less than 3)
-            const minRequired = Math.min(3, actions.length);
-            const topActions = actions.slice(0, minRequired);
-            const topActionsComplete = topActions.length >= minRequired && topActions.every(a => 
-                a.action && a.owner && a.frequency && a.startDate && a.successMetric
-            );
+            // Must complete all 3 WWW actions
+            const allActionsComplete = actions.slice(0, 3).every(a => a.what && a.who && a.when);
             const commitmentComplete = document.getElementById('binding-commitment')?.checked && document.getElementById('signature')?.value.trim();
-            return topActionsComplete && commitmentComplete;
+            return allActionsComplete && commitmentComplete;
         }
 
         function calculateSAP() {
@@ -2969,192 +2959,134 @@
         // Action Tab
         function renderActionTab() {
             const scores = calculateScores();
-            const priorities = DYSFUNCTIONS
+            
+            // Sort dysfunctions by score (lowest first = worst problems)
+            const sortedDysfunctions = DYSFUNCTIONS
                 .map(d => ({ ...d, score: scores[d.id] }))
-                .filter(d => d.score > 0)
-                .sort((a, b) => a.score - b.score) // Lowest first (worst problems)
-                .slice(0, 3);
+                .sort((a, b) => a.score - b.score);
             
-            document.getElementById('priority-cards').innerHTML = priorities.map((p, i) => `
-                <div class="priority-card ${getStatus(p.score)}">
-                    <div class="priority-rank">#${i + 1}</div>
-                    <div class="priority-name">${p.name}</div>
-                    <div class="priority-score">${p.score}/9</div>
-                    <div class="priority-status">${getStatusLabel(p.score)}</div>
-                </div>
-            `).join('') || '<p style="text-align:center; padding:40px; color:var(--grey-500); grid-column: 1/-1;">Complete assessment to see priorities</p>';
-            
-            // Build owners list from assessor + generic team roles
-            const assessorName = document.getElementById('assessor-name')?.value || 'Team Member';
-            const ceoName = document.getElementById('ceo-name')?.value || 'CEO';
-            const owners = [
-                `${ceoName} - CEO`,
-                `${assessorName} - Assessor`,
-                'Team Lead - Operations',
-                'Team Lead - Finance', 
-                'Team Lead - Technology',
-                'Team Lead - Marketing'
-            ];
-            
-            // Ensure we have at least 3 action slots for priorities
-            while (actions.length < Math.min(3, priorities.length)) {
-                actions.push({});
-            }
-            
-            // Set dysfunction IDs for priority actions
-            priorities.forEach((p, i) => {
-                if (actions[i]) actions[i].dysfunctionId = p.id;
-            });
-            
-            // Render all action cards (priority + additional)
-            document.getElementById('action-cards-container').innerHTML = actions.map((action, i) => {
-                const isPriority = i < priorities.length;
-                const priority = isPriority ? priorities[i] : null;
-                const dysfunction = priority || (action.dysfunctionId ? DYSFUNCTIONS.find(d => d.id === action.dysfunctionId) : null);
-                
-                return `
-                    <div class="action-card">
-                        <div class="action-card-header">
-                            <span><strong>Action #${i + 1}:</strong> ${dysfunction ? dysfunction.name : 'Additional Action'}</span>
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                ${!isPriority ? `<button onclick="removeAction(${i})" style="background: none; border: none; cursor: pointer; color: var(--grey-400); padding: 4px;"><span class="icon icon-sm"><i data-lucide="x"></i></span></button>` : ''}
-                                <span style="padding:4px 12px; border-radius:4px; font-size:11px; font-weight:600; background:${isActionComplete(i) ? 'var(--green)' : 'var(--grey-200)'}; color:${isActionComplete(i) ? 'white' : 'var(--grey-600)'};">
-                                    ${isActionComplete(i) ? 'Complete' : 'Incomplete'}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="action-card-body">
-                            ${dysfunction ? `
-                                <div class="action-hint">
-                                    <span class="icon icon-sm"><i data-lucide="book-open"></i></span>
-                                    <span><strong>BRAIN JUICE:</strong> As a team, decide on specific actions to address ${dysfunction.name.toLowerCase()}. Use the framework you learned to guide your discussion.</span>
-                                </div>
-                            ` : ''}
-                            
-                            ${!isPriority ? `
-                                <div class="form-group">
-                                    <label>Focus Area (Optional)</label>
-                                    <select onchange="updateAction(${i}, 'dysfunctionId', this.value)">
-                                        <option value="">General / Multiple areas</option>
-                                        ${DYSFUNCTIONS.map(d => `<option value="${d.id}" ${action.dysfunctionId === d.id ? 'selected' : ''}>${d.name}</option>`).join('')}
-                                    </select>
-                                </div>
-                            ` : ''}
-                            
-                            <div class="form-group">
-                                <label>Your Specific Action</label>
-                                <textarea 
-                                    placeholder="Describe the specific action your team will take..."
-                                    onchange="updateAction(${i}, 'action', this.value)"
-                                    oninput="updateAction(${i}, 'action', this.value)"
-                                    style="min-height: 80px; resize: vertical;">${action.action || ''}</textarea>
-                                ${dysfunction && BRAIN_JUICE_ACTIONS[dysfunction.id] ? `
-                                    <div style="font-size: 12px; color: var(--grey-500); margin-top: 6px; display: flex; align-items: flex-start; gap: 6px;">
-                                        <span class="icon icon-sm" style="color: var(--yellow-600); flex-shrink: 0;"><i data-lucide="lightbulb"></i></span>
-                                        <span>Suggested: ${BRAIN_JUICE_ACTIONS[dysfunction.id].slice(0, 2).join(' | ')}</span>
-                                    </div>
-                                ` : ''}
-                            </div>
-                            
-                            <div class="action-fields">
-                                <div class="form-group">
-                                    <label>Led by</label>
-                                    <select onchange="updateAction(${i}, 'owner', this.value)">
-                                        <option value="">Select owner...</option>
-                                        ${owners.map(o => `<option value="${o}" ${action.owner === o ? 'selected' : ''}>${o}</option>`).join('')}
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Frequency</label>
-                                    <select onchange="updateAction(${i}, 'frequency', this.value)">
-                                        <option value="">Select...</option>
-                                        <option value="daily" ${action.frequency === 'daily' ? 'selected' : ''}>Daily</option>
-                                        <option value="weekly" ${action.frequency === 'weekly' ? 'selected' : ''}>Weekly</option>
-                                        <option value="bi-weekly" ${action.frequency === 'bi-weekly' ? 'selected' : ''}>Bi-weekly</option>
-                                        <option value="monthly" ${action.frequency === 'monthly' ? 'selected' : ''}>Monthly</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Starting</label>
-                                    <input type="date" value="${action.startDate || ''}" onchange="updateAction(${i}, 'startDate', this.value)">
-                                </div>
-                            </div>
-                            
-                            <div class="form-group" style="margin-bottom:0;">
-                                <label>Success Metric</label>
-                                <textarea placeholder="e.g., Team vulnerability index increases from 3.2 to 6.0 within 90 days" onchange="updateAction(${i}, 'successMetric', this.value)">${action.successMetric || ''}</textarea>
-                            </div>
-                        </div>
-                    </div>
+            // Render ALL 5 dysfunctions table
+            const tableContainer = document.getElementById('dysfunction-action-table');
+            if (tableContainer) {
+                tableContainer.innerHTML = `
+                    <table class="www-table" style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: var(--grey-900); color: white;">
+                                <th style="padding: 12px 16px; text-align: left; font-weight: 600;">Dysfunction</th>
+                                <th style="padding: 12px 16px; text-align: center; width: 80px; font-weight: 600;">Score</th>
+                                <th style="padding: 12px 16px; text-align: left; font-weight: 600;">How can it be addressed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${sortedDysfunctions.map((d, i) => `
+                                <tr style="border-bottom: 1px solid var(--grey-200);">
+                                    <td style="padding: 16px; font-weight: 600; vertical-align: top;">
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="width: 10px; height: 10px; border-radius: 50%; background: var(--${d.score >= 8 ? 'green' : d.score >= 6 ? 'amber' : 'red'});"></span>
+                                            ${d.name.toUpperCase()}
+                                        </div>
+                                    </td>
+                                    <td style="padding: 16px; text-align: center; font-weight: 700; color: var(--${d.score >= 8 ? 'green' : d.score >= 6 ? 'amber' : 'red'});">
+                                        ${d.score}/9
+                                    </td>
+                                    <td style="padding: 8px;">
+                                        <textarea 
+                                            id="dysfunction-notes-${d.id}"
+                                            placeholder="Discuss as a team how to address this..."
+                                            style="width: 100%; min-height: 60px; border: 1px solid var(--grey-300); border-radius: 4px; padding: 8px; font-family: inherit; font-size: 13px; resize: vertical;"
+                                        >${dysfunctionNotes[d.id] || ''}</textarea>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
                 `;
-            }).join('');
-            
-            // Add "Add Another Action" button
-            const addBtnContainer = document.getElementById('add-action-btn-container');
-            if (addBtnContainer) {
-                addBtnContainer.innerHTML = actions.length < 7 ? `
-                    <button class="btn btn-secondary" onclick="addAction()" style="width: 100%;">
-                        <span class="icon icon-sm"><i data-lucide="plus"></i></span>
-                        Add Another Action (${actions.length}/7 maximum)
-                    </button>
-                ` : `<p style="text-align: center; color: var(--grey-500); font-size: 13px;">Maximum 7 actions reached</p>`;
+                
+                // Add event listeners for notes
+                sortedDysfunctions.forEach(d => {
+                    const textarea = document.getElementById(`dysfunction-notes-${d.id}`);
+                    if (textarea) {
+                        textarea.addEventListener('input', (e) => {
+                            dysfunctionNotes[d.id] = e.target.value;
+                        });
+                    }
+                });
             }
             
-            if (actions[0]?.startDate) {
-                document.getElementById('first-action-date').textContent = actions[0].startDate;
+            // Ensure we have 3 action slots
+            while (actions.length < 3) {
+                actions.push({ what: '', who: '', when: '' });
             }
             
-            // Update action progress dots and show/hide commitment section
-            const numPriorities = priorities.length;
-            const completedActions = [0, 1, 2].slice(0, numPriorities).filter(i => isActionComplete(i)).length;
-            const dots = document.querySelectorAll('.action-dot');
-            dots.forEach((dot, i) => {
-                if (i < numPriorities) {
-                    dot.style.display = 'inline-block';
-                    dot.classList.toggle('complete', isActionComplete(i));
-                } else {
-                    dot.style.display = 'none';
-                }
-            });
+            // Render 3 simple WWW action rows
+            const actionsContainer = document.getElementById('www-actions-container');
+            if (actionsContainer) {
+                actionsContainer.innerHTML = `
+                    <table class="www-table" style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: var(--grey-900); color: white;">
+                                <th style="padding: 12px 16px; text-align: left; font-weight: 600;">What</th>
+                                <th style="padding: 12px 16px; text-align: left; width: 180px; font-weight: 600;">Who</th>
+                                <th style="padding: 12px 16px; text-align: left; width: 150px; font-weight: 600;">When</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${[0, 1, 2].map(i => `
+                                <tr style="border-bottom: 1px solid var(--grey-200);">
+                                    <td style="padding: 8px;">
+                                        <textarea 
+                                            placeholder="Specific action to take..."
+                                            onchange="updateWWW(${i}, 'what', this.value)"
+                                            oninput="updateWWW(${i}, 'what', this.value)"
+                                            style="width: 100%; min-height: 50px; border: 1px solid var(--grey-300); border-radius: 4px; padding: 8px; font-family: inherit; font-size: 13px; resize: vertical;"
+                                        >${actions[i]?.what || ''}</textarea>
+                                    </td>
+                                    <td style="padding: 8px;">
+                                        <input 
+                                            type="text"
+                                            placeholder="Team Leader"
+                                            value="${actions[i]?.who || ''}"
+                                            onchange="updateWWW(${i}, 'who', this.value)"
+                                            oninput="updateWWW(${i}, 'who', this.value)"
+                                            style="width: 100%; border: 1px solid var(--grey-300); border-radius: 4px; padding: 10px; font-family: inherit; font-size: 13px;"
+                                        >
+                                    </td>
+                                    <td style="padding: 8px;">
+                                        <input 
+                                            type="text"
+                                            placeholder="Next week"
+                                            value="${actions[i]?.when || ''}"
+                                            onchange="updateWWW(${i}, 'when', this.value)"
+                                            oninput="updateWWW(${i}, 'when', this.value)"
+                                            style="width: 100%; border: 1px solid var(--grey-300); border-radius: 4px; padding: 10px; font-family: inherit; font-size: 13px;"
+                                        >
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            }
+            
+            // Check if all 3 actions are complete
+            const allActionsComplete = actions.slice(0, 3).every(a => a.what && a.who && a.when);
             
             const commitmentSection = document.getElementById('commitment-section');
-            const incompleteMsg = document.getElementById('actions-incomplete-msg');
             
-            // Show commitment section when all available actions are complete (or if no priorities)
-            const allActionsComplete = numPriorities > 0 && completedActions >= numPriorities;
-            
-            if (allActionsComplete) {
-                commitmentSection.style.display = 'block';
-                incompleteMsg.style.display = 'none';
-                // Scroll to commitment section smoothly (only if it just became visible)
-                if (!commitmentSection.dataset.shown) {
-                    commitmentSection.dataset.shown = 'true';
-                    setTimeout(() => {
-                        commitmentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 100);
+            if (commitmentSection) {
+                if (allActionsComplete) {
+                    commitmentSection.style.display = 'block';
+                    // Scroll to commitment section smoothly (only if it just became visible)
+                    if (!commitmentSection.dataset.shown) {
+                        commitmentSection.dataset.shown = 'true';
+                        setTimeout(() => {
+                            commitmentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 100);
+                    }
+                } else {
+                    commitmentSection.style.display = 'none';
+                    commitmentSection.dataset.shown = '';
                 }
-            } else if (numPriorities === 0) {
-                commitmentSection.dataset.shown = '';  // Reset for next time
-                // No assessment data yet
-                commitmentSection.style.display = 'none';
-                incompleteMsg.innerHTML = `
-                    <span class="icon icon-lg" style="color: var(--grey-400); margin-bottom: 16px;"><i data-lucide="alert-circle"></i></span>
-                    <h4 style="margin-bottom: 8px; color: var(--grey-600);">Complete Your Assessment First</h4>
-                    <p style="color: var(--grey-500); margin-bottom: 0;">Go back to the Assessment tab and rate your team members</p>
-                `;
-                incompleteMsg.style.display = 'block';
-            } else {
-                commitmentSection.style.display = 'none';
-                commitmentSection.dataset.shown = '';  // Reset for next time
-                incompleteMsg.innerHTML = `
-                    <span class="icon icon-lg" style="color: var(--grey-400); margin-bottom: 16px;"><i data-lucide="clipboard-list"></i></span>
-                    <h4 style="margin-bottom: 8px; color: var(--grey-600);">Complete Your Action Plans</h4>
-                    <p style="color: var(--grey-500); margin-bottom: 0;">Fill out all ${numPriorities} action card${numPriorities > 1 ? 's' : ''} above to unlock the commitment section</p>
-                    <div style="margin-top: 16px; display: flex; gap: 8px; justify-content: center;">
-                        ${[0,1,2].slice(0, numPriorities).map(i => `<span class="action-dot ${isActionComplete(i) ? 'complete' : ''}"></span>`).join('')}
-                    </div>
-                `;
-                incompleteMsg.style.display = 'block';
             }
             
             lucide.createIcons();
@@ -3162,22 +3094,11 @@
 
         function isActionComplete(index) {
             const a = actions[index];
-            return a && a.action && a.owner && a.frequency && a.startDate && a.successMetric;
+            return a && a.what && a.who && a.when;
         }
 
         function addAction() {
-            if (actions.length < 7) {
-                actions.push({
-                    dysfunctionId: '',
-                    action: '',
-                    owner: '',
-                    frequency: '',
-                    startDate: '',
-                    successMetric: ''
-                });
-                renderActionTab();
-                lucide.createIcons();
-            }
+            // No longer needed - we have exactly 3 fixed actions
         }
 
         function removeAction(index) {
@@ -3190,12 +3111,14 @@
             }
         }
 
+        function updateWWW(index, field, value) {
+            if (!actions[index]) actions[index] = { what: '', who: '', when: '' };
+            actions[index][field] = value;
+            updateProgress();
+        }
+
         function updateAction(index, field, value) {
             actions[index][field] = value;
-            if (field === 'startDate' && index === 0) {
-                document.getElementById('first-action-date').textContent = value || '[set date above]';
-            }
-            renderActionTab();
             updateProgress();
         }
 
