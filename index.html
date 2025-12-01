@@ -467,31 +467,31 @@
         
         .rating-btn {
             flex: 1;
-            padding: 16px 12px;
+            padding: 18px 16px;
             border: 2px solid var(--grey-300);
             border-radius: 4px;
             background: var(--white);
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 6px;
             font-family: inherit;
         }
         
         .rating-btn:hover {
             border-color: var(--grey-500);
             transform: translateY(-2px);
+            background: var(--grey-50);
         }
         
         .rating-btn.active { border-width: 3px; }
         .rating-btn.active.rating-good { border-color: var(--green); background: var(--green); color: white; }
         .rating-btn.active.rating-moderate { border-color: var(--amber); background: var(--amber); color: white; }
         .rating-btn.active.rating-bad { border-color: var(--red); background: var(--red); color: white; }
+        .rating-btn.active:hover { transform: translateY(-2px); }
         
-        .rating-value { font-size: 24px; font-weight: 700; font-family: 'Plaak', sans-serif; }
-        .rating-label { font-size: 12px; font-weight: 600; }
+        .rating-label-only { font-size: 16px; font-weight: 600; }
         
         /* Dysfunction Score Card (Scores Tab) */
         .dysfunction-score-card {
@@ -1450,37 +1450,25 @@
                 </div>
             </div>
 
-            <!-- Progress Overview -->
+            <!-- YOUR INFORMATION (MOVED TO TOP) -->
             <div class="card">
                 <h3>
-                    <span class="icon icon-md"><i data-lucide="clipboard-list"></i></span>
-                    Your Assessment Progress
+                    <span class="icon icon-md"><i data-lucide="user"></i></span>
+                    Your Information
                 </h3>
-                <div class="progress-summary">
-                    <div class="progress-item">
-                        <h4>Statements Rated</h4>
-                        <div class="value" id="statements-count">0/15</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Your Name (Required)</label>
+                        <input type="text" id="assessor-name" placeholder="e.g., Sarah Chen" onchange="updateProgress()" oninput="updateProgress()">
                     </div>
-                    <div class="progress-item">
-                        <h4>Completion</h4>
-                        <div class="value" id="completion-pct">0%</div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Your Role (Optional)</label>
+                        <input type="text" id="assessor-role" placeholder="e.g., CFO">
                     </div>
-                    <div class="progress-item">
-                        <h4>SAP Progress</h4>
-                        <div class="value" style="color: var(--yellow-600);" id="sap-progress">+0</div>
-                    </div>
-                    <div class="progress-item">
-                        <h4>Status</h4>
-                        <div class="value" id="assessment-status" style="color: var(--amber);">In Progress</div>
-                    </div>
-                </div>
-                <div class="quick-view" id="quick-view" style="display: none;">
-                    <strong style="color: var(--grey-400);">Live Scores:</strong>
-                    <div id="quick-view-items" style="display: contents;"></div>
                 </div>
             </div>
 
-            <!-- Rating Scale Guide -->
+            <!-- Rating Scale Guide (without numbers) -->
             <div class="card" style="background: var(--yellow-50); border-color: var(--yellow-300);">
                 <h3>
                     <span class="icon icon-md"><i data-lucide="help-circle"></i></span>
@@ -1490,19 +1478,16 @@
                     Rate how frequently each behavior occurs in YOUR TEAM based on the last 90 days:
                 </p>
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
-                    <div style="text-align: center; padding: 16px; background: var(--white); border-radius: 4px;">
-                        <div style="font-size: 28px; font-weight: 700; color: var(--green); margin-bottom: 8px;">3</div>
-                        <div style="font-weight: 600; margin-bottom: 4px;">Usually</div>
+                    <div style="text-align: center; padding: 16px; background: var(--white); border-radius: 4px; border-left: 3px solid var(--green);">
+                        <div style="font-size: 18px; font-weight: 700; color: var(--green); margin-bottom: 4px;">Usually</div>
                         <div style="font-size: 12px; color: var(--grey-600);">This happens most of the time</div>
                     </div>
-                    <div style="text-align: center; padding: 16px; background: var(--white); border-radius: 4px;">
-                        <div style="font-size: 28px; font-weight: 700; color: var(--amber); margin-bottom: 8px;">2</div>
-                        <div style="font-weight: 600; margin-bottom: 4px;">Sometimes</div>
+                    <div style="text-align: center; padding: 16px; background: var(--white); border-radius: 4px; border-left: 3px solid var(--amber);">
+                        <div style="font-size: 18px; font-weight: 700; color: var(--amber); margin-bottom: 4px;">Sometimes</div>
                         <div style="font-size: 12px; color: var(--grey-600);">This happens occasionally</div>
                     </div>
-                    <div style="text-align: center; padding: 16px; background: var(--white); border-radius: 4px;">
-                        <div style="font-size: 28px; font-weight: 700; color: var(--red); margin-bottom: 8px;">1</div>
-                        <div style="font-weight: 600; margin-bottom: 4px;">Rarely</div>
+                    <div style="text-align: center; padding: 16px; background: var(--white); border-radius: 4px; border-left: 3px solid var(--red);">
+                        <div style="font-size: 18px; font-weight: 700; color: var(--red); margin-bottom: 4px;">Rarely</div>
                         <div style="font-size: 12px; color: var(--grey-600);">This hardly ever happens</div>
                     </div>
                 </div>
@@ -1526,21 +1511,33 @@
             <!-- The 15 Statement Cards -->
             <div id="statements-container"></div>
 
-            <!-- Your Information -->
+            <!-- ASSESSMENT PROGRESS (MOVED TO BOTTOM) -->
             <div class="card">
                 <h3>
-                    <span class="icon icon-md"><i data-lucide="user"></i></span>
-                    Your Information
+                    <span class="icon icon-md"><i data-lucide="bar-chart-2"></i></span>
+                    Your Assessment Progress
                 </h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                    <div class="form-group" style="margin-bottom: 0;">
-                        <label>Your Name (Required)</label>
-                        <input type="text" id="assessor-name" placeholder="e.g., Sarah Chen" onchange="updateProgress()" oninput="updateProgress()">
+                <div class="progress-summary">
+                    <div class="progress-item">
+                        <h4>Statements Rated</h4>
+                        <div class="value" id="statements-count">0/15</div>
                     </div>
-                    <div class="form-group" style="margin-bottom: 0;">
-                        <label>Your Role (Optional)</label>
-                        <input type="text" id="assessor-role" placeholder="e.g., CFO">
+                    <div class="progress-item">
+                        <h4>Completion</h4>
+                        <div class="value" id="completion-pct">0%</div>
                     </div>
+                    <div class="progress-item">
+                        <h4>SAP Progress</h4>
+                        <div class="value" style="color: var(--yellow-600);" id="sap-progress">+0</div>
+                    </div>
+                    <div class="progress-item">
+                        <h4>Status</h4>
+                        <div class="value" id="assessment-status" style="color: var(--amber);">In Progress</div>
+                    </div>
+                </div>
+                <div class="quick-view" id="quick-view" style="display: none;">
+                    <strong style="color: var(--grey-400);">Live Scores:</strong>
+                    <div id="quick-view-items" style="display: contents;"></div>
                 </div>
             </div>
 
@@ -1651,13 +1648,16 @@
             <div class="card card-yellow">
                 <h3>
                     <span class="icon icon-md"><i data-lucide="target"></i></span>
-                    Team's Top 3 Priority Areas (From Your Assessment)
+                    Team's Top 3 Priority Areas
                 </h3>
-                <p style="color: var(--grey-600); margin-bottom: 24px; margin-top: -16px; font-size: 13px;">Based on your dysfunction scores. Team will validate these during Fast Track hour.</p>
+                <p style="color: var(--grey-600); margin-bottom: 24px; margin-top: -16px; font-size: 13px;">Based on team's collective assessment. Complete these actions during your Fast Track hour.</p>
                 <div class="priority-cards" id="priority-cards"></div>
             </div>
 
             <div id="action-cards-container"></div>
+
+            <!-- Add Another Action Button -->
+            <div id="add-action-btn-container" style="margin-bottom: 24px;"></div>
 
             <!-- Actions incomplete message -->
             <div id="actions-incomplete-msg" class="card" style="text-align: center; padding: 48px 32px; background: var(--grey-50); border: 2px dashed var(--grey-300);">
@@ -2068,37 +2068,36 @@
             if (!container) return;
             
             container.innerHTML = STATEMENTS.map(stmt => {
-                const dysfunction = DYSFUNCTIONS.find(d => d.id === stmt.dysfunction);
                 const currentRating = assessment.responses[stmt.id] || 0;
                 const isComplete = currentRating > 0;
                 
                 return `
                     <div class="statement-card ${isComplete ? 'completed' : ''}" id="statement-card-${stmt.id}">
-                        <div class="statement-header">
+                        <!-- Header with number + hint question (no dysfunction label) -->
+                        <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
                             <div class="statement-number">${stmt.id}</div>
-                            <div class="statement-dysfunction-badge">${dysfunction.shortName}</div>
-                            ${isComplete ? '<span class="icon icon-sm" style="color: var(--green);"><i data-lucide="check-circle"></i></span>' : ''}
+                            <div style="flex: 1;">
+                                <div style="font-size: 12px; color: var(--grey-600); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                                    <span class="icon icon-sm" style="color: var(--yellow-600);"><i data-lucide="lightbulb"></i></span>
+                                    ${stmt.hint}
+                                </div>
+                                <div style="font-size: 15px; line-height: 1.7; color: var(--grey-800); font-weight: 500;">
+                                    ${stmt.text}
+                                </div>
+                            </div>
+                            ${isComplete ? '<span class="icon icon-sm" style="color: var(--green); flex-shrink: 0;"><i data-lucide="check-circle"></i></span>' : ''}
                         </div>
                         
-                        <div class="statement-text">${stmt.text}</div>
-                        
-                        <div class="statement-hint">
-                            <span class="icon icon-sm"><i data-lucide="lightbulb"></i></span>
-                            ${stmt.hint}
-                        </div>
-                        
+                        <!-- Rating buttons WITHOUT numbers -->
                         <div class="rating-buttons">
                             <button class="rating-btn ${currentRating === 1 ? 'active rating-bad' : ''}" onclick="rateStatement(${stmt.id}, 1)">
-                                <span class="rating-value">1</span>
-                                <span class="rating-label">Rarely</span>
+                                <span class="rating-label-only">Rarely</span>
                             </button>
                             <button class="rating-btn ${currentRating === 2 ? 'active rating-moderate' : ''}" onclick="rateStatement(${stmt.id}, 2)">
-                                <span class="rating-value">2</span>
-                                <span class="rating-label">Sometimes</span>
+                                <span class="rating-label-only">Sometimes</span>
                             </button>
                             <button class="rating-btn ${currentRating === 3 ? 'active rating-good' : ''}" onclick="rateStatement(${stmt.id}, 3)">
-                                <span class="rating-value">3</span>
-                                <span class="rating-label">Usually</span>
+                                <span class="rating-label-only">Usually</span>
                             </button>
                         </div>
                     </div>
@@ -2230,10 +2229,14 @@
         }
 
         function checkDashboardComplete() {
-            const assignedActions = actions.filter(a => a.dysfunctionId);
-            const actionsComplete = assignedActions.length > 0 && assignedActions.every(a => a.action && a.owner && a.frequency && a.startDate && a.successMetric);
+            // Must complete at least the top 3 priority actions (or all if less than 3)
+            const minRequired = Math.min(3, actions.length);
+            const topActions = actions.slice(0, minRequired);
+            const topActionsComplete = topActions.length >= minRequired && topActions.every(a => 
+                a.action && a.owner && a.frequency && a.startDate && a.successMetric
+            );
             const commitmentComplete = document.getElementById('binding-commitment')?.checked && document.getElementById('signature')?.value.trim();
-            return actionsComplete && commitmentComplete;
+            return topActionsComplete && commitmentComplete;
         }
 
         function calculateSAP() {
@@ -2332,29 +2335,64 @@
                 'Team Lead - Marketing'
             ];
             
-            document.getElementById('action-cards-container').innerHTML = priorities.map((p, i) => {
-                actions[i] = actions[i] || {};
-                actions[i].dysfunctionId = p.id;
+            // Ensure we have at least 3 action slots for priorities
+            while (actions.length < Math.min(3, priorities.length)) {
+                actions.push({});
+            }
+            
+            // Set dysfunction IDs for priority actions
+            priorities.forEach((p, i) => {
+                if (actions[i]) actions[i].dysfunctionId = p.id;
+            });
+            
+            // Render all action cards (priority + additional)
+            document.getElementById('action-cards-container').innerHTML = actions.map((action, i) => {
+                const isPriority = i < priorities.length;
+                const priority = isPriority ? priorities[i] : null;
+                const dysfunction = priority || (action.dysfunctionId ? DYSFUNCTIONS.find(d => d.id === action.dysfunctionId) : null);
+                
                 return `
                     <div class="action-card">
                         <div class="action-card-header">
-                            <span><strong>Action #${i + 1}:</strong> ${p.name}</span>
-                            <span style="padding:4px 12px; border-radius:4px; font-size:11px; font-weight:600; background:${isActionComplete(i) ? 'var(--green)' : 'var(--grey-200)'}; color:${isActionComplete(i) ? 'white' : 'var(--grey-600)'};">
-                                ${isActionComplete(i) ? 'Complete' : 'Incomplete'}
-                            </span>
+                            <span><strong>Action #${i + 1}:</strong> ${dysfunction ? dysfunction.name : 'Additional Action'}</span>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                ${!isPriority ? `<button onclick="removeAction(${i})" style="background: none; border: none; cursor: pointer; color: var(--grey-400); padding: 4px;"><span class="icon icon-sm"><i data-lucide="x"></i></span></button>` : ''}
+                                <span style="padding:4px 12px; border-radius:4px; font-size:11px; font-weight:600; background:${isActionComplete(i) ? 'var(--green)' : 'var(--grey-200)'}; color:${isActionComplete(i) ? 'white' : 'var(--grey-600)'};">
+                                    ${isActionComplete(i) ? 'Complete' : 'Incomplete'}
+                                </span>
+                            </div>
                         </div>
                         <div class="action-card-body">
-                            <div class="action-hint">
-                                <span class="icon icon-sm"><i data-lucide="book-open"></i></span>
-                                <span><strong>BRAIN JUICE:</strong> Focus on ${p.name.toLowerCase()} by implementing proven strategies from your learning.</span>
-                            </div>
+                            ${dysfunction ? `
+                                <div class="action-hint">
+                                    <span class="icon icon-sm"><i data-lucide="book-open"></i></span>
+                                    <span><strong>BRAIN JUICE:</strong> As a team, decide on specific actions to address ${dysfunction.name.toLowerCase()}. Use the framework you learned to guide your discussion.</span>
+                                </div>
+                            ` : ''}
+                            
+                            ${!isPriority ? `
+                                <div class="form-group">
+                                    <label>Focus Area (Optional)</label>
+                                    <select onchange="updateAction(${i}, 'dysfunctionId', this.value)">
+                                        <option value="">General / Multiple areas</option>
+                                        ${DYSFUNCTIONS.map(d => `<option value="${d.id}" ${action.dysfunctionId === d.id ? 'selected' : ''}>${d.name}</option>`).join('')}
+                                    </select>
+                                </div>
+                            ` : ''}
                             
                             <div class="form-group">
                                 <label>Your Specific Action</label>
-                                <select onchange="updateAction(${i}, 'action', this.value)">
-                                    <option value="">Select a Brain Juice recommended action...</option>
-                                    ${BRAIN_JUICE_ACTIONS[p.id].map(opt => `<option value="${opt}" ${actions[i].action === opt ? 'selected' : ''}>${opt}</option>`).join('')}
-                                </select>
+                                <textarea 
+                                    placeholder="Describe the specific action your team will take..."
+                                    onchange="updateAction(${i}, 'action', this.value)"
+                                    oninput="updateAction(${i}, 'action', this.value)"
+                                    style="min-height: 80px; resize: vertical;">${action.action || ''}</textarea>
+                                ${dysfunction && BRAIN_JUICE_ACTIONS[dysfunction.id] ? `
+                                    <div style="font-size: 12px; color: var(--grey-500); margin-top: 6px; display: flex; align-items: flex-start; gap: 6px;">
+                                        <span class="icon icon-sm" style="color: var(--yellow-600); flex-shrink: 0;"><i data-lucide="lightbulb"></i></span>
+                                        <span>Suggested: ${BRAIN_JUICE_ACTIONS[dysfunction.id].slice(0, 2).join(' | ')}</span>
+                                    </div>
+                                ` : ''}
                             </div>
                             
                             <div class="action-fields">
@@ -2362,33 +2400,44 @@
                                     <label>Led by</label>
                                     <select onchange="updateAction(${i}, 'owner', this.value)">
                                         <option value="">Select owner...</option>
-                                        ${owners.map(o => `<option value="${o}" ${actions[i].owner === o ? 'selected' : ''}>${o}</option>`).join('')}
+                                        ${owners.map(o => `<option value="${o}" ${action.owner === o ? 'selected' : ''}>${o}</option>`).join('')}
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Frequency</label>
                                     <select onchange="updateAction(${i}, 'frequency', this.value)">
                                         <option value="">Select...</option>
-                                        <option value="daily" ${actions[i].frequency === 'daily' ? 'selected' : ''}>Daily</option>
-                                        <option value="weekly" ${actions[i].frequency === 'weekly' ? 'selected' : ''}>Weekly</option>
-                                        <option value="bi-weekly" ${actions[i].frequency === 'bi-weekly' ? 'selected' : ''}>Bi-weekly</option>
-                                        <option value="monthly" ${actions[i].frequency === 'monthly' ? 'selected' : ''}>Monthly</option>
+                                        <option value="daily" ${action.frequency === 'daily' ? 'selected' : ''}>Daily</option>
+                                        <option value="weekly" ${action.frequency === 'weekly' ? 'selected' : ''}>Weekly</option>
+                                        <option value="bi-weekly" ${action.frequency === 'bi-weekly' ? 'selected' : ''}>Bi-weekly</option>
+                                        <option value="monthly" ${action.frequency === 'monthly' ? 'selected' : ''}>Monthly</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Starting</label>
-                                    <input type="date" value="${actions[i].startDate || ''}" onchange="updateAction(${i}, 'startDate', this.value)">
+                                    <input type="date" value="${action.startDate || ''}" onchange="updateAction(${i}, 'startDate', this.value)">
                                 </div>
                             </div>
                             
                             <div class="form-group" style="margin-bottom:0;">
                                 <label>Success Metric</label>
-                                <textarea placeholder="e.g., Team vulnerability index increases from 3.2 to 6.0 within 90 days" onchange="updateAction(${i}, 'successMetric', this.value)">${actions[i].successMetric || ''}</textarea>
+                                <textarea placeholder="e.g., Team vulnerability index increases from 3.2 to 6.0 within 90 days" onchange="updateAction(${i}, 'successMetric', this.value)">${action.successMetric || ''}</textarea>
                             </div>
                         </div>
                     </div>
                 `;
             }).join('');
+            
+            // Add "Add Another Action" button
+            const addBtnContainer = document.getElementById('add-action-btn-container');
+            if (addBtnContainer) {
+                addBtnContainer.innerHTML = actions.length < 7 ? `
+                    <button class="btn btn-secondary" onclick="addAction()" style="width: 100%;">
+                        <span class="icon icon-sm"><i data-lucide="plus"></i></span>
+                        Add Another Action (${actions.length}/7 maximum)
+                    </button>
+                ` : `<p style="text-align: center; color: var(--grey-500); font-size: 13px;">Maximum 7 actions reached</p>`;
+            }
             
             if (actions[0]?.startDate) {
                 document.getElementById('first-action-date').textContent = actions[0].startDate;
@@ -2453,6 +2502,31 @@
         function isActionComplete(index) {
             const a = actions[index];
             return a && a.action && a.owner && a.frequency && a.startDate && a.successMetric;
+        }
+
+        function addAction() {
+            if (actions.length < 7) {
+                actions.push({
+                    dysfunctionId: '',
+                    action: '',
+                    owner: '',
+                    frequency: '',
+                    startDate: '',
+                    successMetric: ''
+                });
+                renderActionTab();
+                lucide.createIcons();
+            }
+        }
+
+        function removeAction(index) {
+            // Only allow removing non-priority actions (index >= 3)
+            if (index >= 3 && actions.length > 3) {
+                actions.splice(index, 1);
+                renderActionTab();
+                updateProgress();
+                lucide.createIcons();
+            }
         }
 
         function updateAction(index, field, value) {
