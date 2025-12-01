@@ -2723,10 +2723,8 @@
             document.getElementById('results-slide').style.display = 'flex';
             document.getElementById('results-slide').classList.add('active');
             
-            // Update progress bar to 100% and hide it
-            document.getElementById('slide-progress-text').textContent = '';
-            document.getElementById('slide-progress-fill').style.width = '100%';
-            document.querySelector('.progress-header').style.display = 'none';
+            // Hide the progress bar completely on results
+            document.querySelector('.slide-progress-header').style.display = 'none';
             
             // Update FTP
             updateProgress();
