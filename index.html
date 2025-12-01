@@ -117,7 +117,7 @@
             color: var(--yellow-400);
         }
         
-        .sap-display {
+        .ftp-display {
             display: flex;
             align-items: center;
             gap: 6px;
@@ -125,7 +125,7 @@
             font-weight: 600;
         }
         
-        .sap-display .icon { color: var(--yellow-400); }
+        .ftp-display .icon { color: var(--yellow-400); }
         
         .logo {
             background: var(--white);
@@ -876,7 +876,7 @@
             font-size: 16px;
         }
         
-        .sap-earned-card {
+        .ftp-earned-card {
             background: var(--yellow-400);
             border-radius: 8px;
             padding: 20px 28px;
@@ -888,12 +888,12 @@
             max-width: 500px;
         }
         
-        .sap-earned-card span {
+        .ftp-earned-card span {
             font-size: 14px;
             font-weight: 500;
         }
         
-        .sap-earned-card strong {
+        .ftp-earned-card strong {
             font-size: 32px;
             font-family: 'Plaak', sans-serif;
         }
@@ -1539,9 +1539,9 @@
         
         .mastery-level { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; }
         .mastery-level span { font-family: 'Plaak', sans-serif; font-size: 22px; display: block; margin-top: 4px; }
-        .mastery-sap { text-align: right; }
-        .mastery-sap .value { font-size: 26px; font-weight: 700; }
-        .mastery-sap .label { font-size: 12px; opacity: 0.7; }
+        .mastery-ftp { text-align: right; }
+        .mastery-ftp .value { font-size: 26px; font-weight: 700; }
+        .mastery-ftp .label { font-size: 12px; opacity: 0.7; }
         
         .progress-bar {
             height: 6px;
@@ -1845,9 +1845,9 @@
         <div class="header-content">
             <div class="header-left">
                 <span class="sprint-badge"><strong>Sprint 5</strong> of 32 | Team Dynamics</span>
-                <div class="sap-display">
-                    <span class="icon icon-sm"><i data-lucide="star"></i></span>
-                    <span id="sap-count">0 SAP</span>
+                <div class="ftp-display">
+                    <span class="icon icon-sm"><i data-lucide="zap"></i></span>
+                    <span id="ftp-count">0 FTP</span>
                 </div>
             </div>
             <div class="logo">
@@ -2051,9 +2051,9 @@
                     <p>Your team's top dysfunction areas identified</p>
                 </div>
                 
-                <div class="sap-earned-card">
+                <div class="ftp-earned-card">
                     <span>Assessment Complete</span>
-                    <strong>+25 SAP</strong>
+                    <strong>+25 FTP</strong>
                 </div>
                 
                 <div class="priorities-simple" id="results-priorities"></div>
@@ -2095,24 +2095,28 @@
                 <p style="color: rgba(255,255,255,0.9);">You've honestly assessed your team's dynamics. Your Guru will compile everyone's responses for the team discussion.</p>
             </div>
 
-            <!-- SAP Earned Card -->
+            <!-- FTP Earned Card -->
             <div class="card" style="background: var(--yellow-400); border-color: var(--yellow-400);">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
                         <h3 style="margin-bottom: 8px;">
-                            <span class="icon icon-md"><i data-lucide="star"></i></span>
-                            SAP Earned
+                            <span class="icon icon-md"><i data-lucide="zap"></i></span>
+                            FTP Earned
                         </h3>
-                        <p style="margin: 0; font-size: 14px; opacity: 0.8;">For completing your individual assessment</p>
+                        <p style="margin: 0; font-size: 14px; opacity: 0.8;">Fast Track Points for completing your assessment</p>
                     </div>
                     <div style="font-size: 48px; font-weight: 900; font-family: 'Plaak', sans-serif;">+25</div>
                 </div>
             </div>
 
-            <!-- Your 5 Dysfunction Scores -->
-            <h2 style="margin-bottom: 24px;">Your Team's Dysfunction Scores</h2>
-            
-            <div id="dysfunction-scores-grid"></div>
+            <!-- Dysfunction Scores Summary -->
+            <div class="card">
+                <h3 style="margin-bottom: 20px;">
+                    <span class="icon icon-md"><i data-lucide="bar-chart-2"></i></span>
+                    Your Team's Dysfunction Scores
+                </h3>
+                <div id="dysfunction-scores-summary"></div>
+            </div>
 
             <!-- What Happens Next -->
             <div class="card">
@@ -2295,15 +2299,15 @@
                         Current Level
                         <span id="mastery-level">NOVICE</span>
                     </div>
-                    <div class="mastery-sap">
-                        <div class="value" id="mastery-sap">0</div>
-                        <div class="label">SAP</div>
+                    <div class="mastery-ftp">
+                        <div class="value" id="mastery-ftp">0</div>
+                        <div class="label">FTP</div>
                     </div>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-bar-fill" id="mastery-progress" style="width: 0%"></div>
                 </div>
-                <div class="mastery-next" id="mastery-next">200 more SAP needed for PRACTITIONER level</div>
+                <div class="mastery-next" id="mastery-next">200 more FTP needed for PRACTITIONER level</div>
             </div>
 
             <div class="stats-grid">
@@ -2323,9 +2327,9 @@
                     <div class="label">Actions Committed</div>
                 </div>
                 <div class="stat-card">
-                    <div class="icon-wrap yellow"><i data-lucide="star"></i></div>
-                    <div class="value" style="color: var(--yellow-600);" id="sap-earned">+0</div>
-                    <div class="label">SAP Earned</div>
+                    <div class="icon-wrap yellow"><i data-lucide="zap"></i></div>
+                    <div class="value" style="color: var(--yellow-600);" id="ftp-earned">+0</div>
+                    <div class="label">FTP Earned</div>
                 </div>
             </div>
 
@@ -2723,7 +2727,7 @@
             document.getElementById('slide-progress-text').textContent = 'Complete!';
             document.getElementById('slide-progress-fill').style.width = '100%';
             
-            // Update SAP
+            // Update FTP
             updateProgress();
             
             lucide.createIcons();
@@ -2968,7 +2972,7 @@
                 // Show completion toast
                 const toast = document.createElement('div');
                 toast.className = 'toast';
-                toast.innerHTML = '🏆 Assessment Complete! +25 SAP';
+                toast.innerHTML = '🏆 Assessment Complete! +25 FTP';
                 toast.style.cssText = 'position:fixed;top:80px;right:24px;background:var(--green);color:white;padding:16px 24px;border-radius:4px;z-index:1000;font-weight:600;animation:slideIn 0.3s ease;';
                 document.body.appendChild(toast);
                 setTimeout(() => toast.remove(), 3000);
@@ -2990,12 +2994,12 @@
             // Update progress display
             const statementsCount = document.getElementById('statements-count');
             const completionPct = document.getElementById('completion-pct');
-            const sapProgress = document.getElementById('sap-progress');
+            const ftpProgress = document.getElementById('ftp-progress');
             const assessmentStatus = document.getElementById('assessment-status');
             
             if (statementsCount) statementsCount.textContent = `${completed}/15`;
             if (completionPct) completionPct.textContent = `${Math.round((completed/15)*100)}%`;
-            if (sapProgress) sapProgress.textContent = `+${assessmentComplete ? 25 : 0}`;
+            if (ftpProgress) ftpProgress.textContent = `+${assessmentComplete ? 25 : 0}`;
             if (assessmentStatus) {
                 assessmentStatus.textContent = assessmentComplete ? 'Complete!' : 'In Progress';
                 assessmentStatus.style.color = assessmentComplete ? 'var(--green)' : 'var(--amber)';
@@ -3055,10 +3059,10 @@
             }
             if (viewDashboardBtn) viewDashboardBtn.disabled = !dashboardComplete;
             
-            // SAP Display
-            const sap = calculateSAP();
-            const sapCount = document.getElementById('sap-count');
-            if (sapCount) sapCount.textContent = `${sap} SAP`;
+            // FTP Display
+            const ftp = calculateFTP();
+            const ftpCount = document.getElementById('ftp-count');
+            if (ftpCount) ftpCount.textContent = `${ftp} FTP`;
             
             lucide.createIcons();
         }
@@ -3070,17 +3074,17 @@
             return allActionsComplete && commitmentComplete;
         }
 
-        function calculateSAP() {
-            let sap = 0;
+        function calculateFTP() {
+            let ftp = 0;
             // Assessment complete: +25
-            if (isAssessmentComplete()) sap += 25;
+            if (isAssessmentComplete()) ftp += 25;
             // Each action complete: +25 (max 75)
             actions.forEach(a => {
-                if (a.action && a.owner && a.frequency && a.startDate && a.successMetric) sap += 25;
+                if (a.action && a.owner && a.frequency && a.startDate && a.successMetric) ftp += 25;
             });
             // Commitment signed: +25
-            if (document.getElementById('binding-commitment')?.checked && document.getElementById('signature')?.value.trim()) sap += 25;
-            return sap;
+            if (document.getElementById('binding-commitment')?.checked && document.getElementById('signature')?.value.trim()) ftp += 25;
+            return ftp;
         }
 
         // Render Your Scores Tab
@@ -3093,45 +3097,58 @@
                 }))
                 .sort((a, b) => a.score - b.score); // Lowest first (worst problems)
             
-            const container = document.getElementById('dysfunction-scores-grid');
+            const container = document.getElementById('dysfunction-scores-summary');
             if (!container) return;
             
-            container.innerHTML = sorted.map((d, index) => `
-                <div class="dysfunction-score-card ${getStatus(d.score)}">
-                    <div class="dysfunction-score-header">
-                        <div class="priority-badge">${index < 3 ? 'Priority #' + (index + 1) : ''}</div>
-                        <div class="status-badge-lg ${getStatus(d.score)}">${getStatusLabel(d.score)}</div>
-                    </div>
-                    
-                    <h3 style="margin: 16px 0;">${d.name}</h3>
-                    
-                    <div class="score-display">
-                        <span class="score-value">${d.score}</span>
-                        <span class="score-max">/9</span>
-                    </div>
-                    
-                    <div class="score-breakdown">
-                        <h5>Based on your ratings:</h5>
-                        ${d.statements.map(stmtId => {
-                            const stmt = STATEMENTS.find(s => s.id === stmtId);
-                            const rating = assessment.responses[stmtId];
-                            return `
-                                <div class="statement-score-item">
-                                    <span>Statement ${stmtId}</span>
-                                    <span class="rating-${getRatingStatus(rating)}">${getRatingLabel(rating)} (${rating})</span>
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                    
-                    ${index < 3 ? `
-                        <div class="action-preview">
-                            <span class="icon icon-sm"><i data-lucide="target"></i></span>
-                            This will be one of your top 3 action areas
-                        </div>
-                    ` : ''}
+            // Calculate key insights
+            const criticalCount = sorted.filter(d => d.score < 6).length;
+            const topPriority = sorted[0];
+            const avgScore = (Object.values(scores).reduce((a, b) => a + b, 0) / 5).toFixed(1);
+            
+            container.innerHTML = `
+                <div style="background: var(--grey-50); padding: 24px; border-radius: 8px; margin-bottom: 24px;">
+                    <h4 style="margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                        <span class="icon icon-sm"><i data-lucide="lightbulb"></i></span>
+                        Key Findings
+                    </h4>
+                    <p style="color: var(--grey-700); line-height: 1.8; margin: 0;">
+                        Your team has <strong>${criticalCount} critical dysfunction${criticalCount !== 1 ? 's' : ''}</strong> requiring immediate attention. 
+                        The top priority is <strong>${topPriority.name}</strong> (${topPriority.score}/9), which needs focused improvement. 
+                        Your overall team health score is <strong>${avgScore}/9</strong>.
+                    </p>
                 </div>
-            `).join('');
+                
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: var(--grey-900); color: white;">
+                            <th style="padding: 12px 16px; text-align: left; font-weight: 600;">Dysfunction</th>
+                            <th style="padding: 12px 16px; text-align: center; width: 100px; font-weight: 600;">Score</th>
+                            <th style="padding: 12px 16px; text-align: center; width: 120px; font-weight: 600;">Status</th>
+                            <th style="padding: 12px 16px; text-align: center; width: 100px; font-weight: 600;">Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${sorted.map((d, index) => `
+                            <tr style="border-bottom: 1px solid var(--grey-200);">
+                                <td style="padding: 16px; font-weight: 600;">
+                                    ${d.name}
+                                </td>
+                                <td style="padding: 16px; text-align: center; font-weight: 700; font-size: 18px; color: var(--${d.score >= 8 ? 'green' : d.score >= 6 ? 'amber' : 'red'});">
+                                    ${d.score}/9
+                                </td>
+                                <td style="padding: 16px; text-align: center;">
+                                    <span style="display: inline-block; padding: 4px 12px; border-radius: 4px; font-size: 11px; font-weight: 700; background: var(--${d.score >= 8 ? 'green' : d.score >= 6 ? 'amber' : 'red'}); color: white;">
+                                        ${getStatusLabel(d.score)}
+                                    </span>
+                                </td>
+                                <td style="padding: 16px; text-align: center;">
+                                    ${index < 3 ? `<span style="display: inline-block; padding: 4px 12px; border-radius: 4px; font-size: 11px; font-weight: 700; background: var(--yellow-400);">#${index + 1}</span>` : '—'}
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
             
             lucide.createIcons();
         }
@@ -3308,23 +3325,23 @@
             const totalScore = Object.values(scores).reduce((a, b) => a + b, 0);
             const overallScore = totalScore / 5; // Average of 5 dysfunctions
             const criticalCount = DYSFUNCTIONS.filter(d => scores[d.id] < 6).length;
-            const sap = calculateSAP();
+            const ftp = calculateFTP();
             const actionsCount = actions.filter((a, i) => isActionComplete(i)).length;
             
             document.getElementById('overall-score').textContent = overallScore.toFixed(1);
             document.getElementById('critical-count').textContent = criticalCount;
             document.getElementById('critical-icon-wrap').style.color = criticalCount > 0 ? 'var(--red)' : 'var(--green)';
             document.getElementById('actions-count').textContent = actionsCount;
-            document.getElementById('sap-earned').textContent = `+${sap}`;
+            document.getElementById('ftp-earned').textContent = `+${ftp}`;
             
-            const masteryLevel = sap < 200 ? 'NOVICE' : sap < 500 ? 'PRACTITIONER' : 'MASTER';
-            const nextLevelSAP = masteryLevel === 'NOVICE' ? 200 : 500;
-            const progress = Math.min((sap / nextLevelSAP) * 100, 100);
+            const masteryLevel = ftp < 200 ? 'NOVICE' : ftp < 500 ? 'PRACTITIONER' : 'MASTER';
+            const nextLevelFTP = masteryLevel === 'NOVICE' ? 200 : 500;
+            const progress = Math.min((ftp / nextLevelFTP) * 100, 100);
             
             document.getElementById('mastery-level').textContent = masteryLevel;
-            document.getElementById('mastery-sap').textContent = sap;
+            document.getElementById('mastery-ftp').textContent = ftp;
             document.getElementById('mastery-progress').style.width = `${progress}%`;
-            document.getElementById('mastery-next').textContent = `${nextLevelSAP - sap} more SAP needed for ${masteryLevel === 'NOVICE' ? 'PRACTITIONER' : 'MASTER'} level`;
+            document.getElementById('mastery-next').textContent = `${nextLevelFTP - ftp} more FTP needed for ${masteryLevel === 'NOVICE' ? 'PRACTITIONER' : 'MASTER'} level`;
             
             // Heat map shows YOUR scores (single row)
             const heatMapBody = document.getElementById('heat-map-body');
