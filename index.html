@@ -466,33 +466,412 @@
             gap: 12px;
         }
         
-        .rating-btn {
-            flex: 1;
-            padding: 18px 16px;
-            border: 2px solid var(--grey-300);
-            border-radius: 4px;
+        /* ================================================
+           TYPEFORM-STYLE ASSESSMENT SLIDES
+           ================================================ */
+        
+        .assessment-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: var(--white);
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .assessment-slide {
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 100px 24px 60px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .assessment-slide.active {
+            display: flex;
+        }
+        
+        .slide-progress-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--grey-200);
+            z-index: 1001;
+        }
+        
+        .slide-progress-inner {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .slide-progress-text {
+            font-size: 14px;
+            color: var(--grey-500);
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        
+        .slide-progress-bar {
+            height: 6px;
+            background: var(--grey-200);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .slide-progress-fill {
+            height: 100%;
+            background: var(--yellow-400);
+            transition: width 0.4s ease;
+            border-radius: 3px;
+        }
+        
+        .question-number-badge {
+            width: 56px;
+            height: 56px;
+            background: var(--yellow-400);
+            color: var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 24px;
+            font-family: 'Plaak', sans-serif;
+            margin-bottom: 32px;
+        }
+        
+        .question-primary {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--black);
+            text-align: center;
+            margin-bottom: 16px;
+            line-height: 1.3;
+            font-family: 'Plaak', sans-serif;
+        }
+        
+        .question-context {
+            font-size: 16px;
+            color: var(--grey-500);
+            text-align: center;
+            margin-bottom: 48px;
+            max-width: 560px;
+            line-height: 1.6;
+        }
+        
+        .answer-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .answer-btn {
+            padding: 22px 32px;
+            border: 2px solid var(--grey-300);
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 18px;
+            font-weight: 600;
             font-family: inherit;
+            color: var(--grey-700);
         }
         
-        .rating-btn:hover {
-            border-color: var(--grey-500);
+        .answer-btn:hover {
+            border-color: var(--black);
             transform: translateY(-2px);
-            background: var(--grey-50);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
-        .rating-btn.active { border-width: 3px; }
-        .rating-btn.active.rating-good { border-color: var(--green); background: var(--green); color: white; }
-        .rating-btn.active.rating-moderate { border-color: var(--amber); background: var(--amber); color: white; }
-        .rating-btn.active.rating-bad { border-color: var(--red); background: var(--red); color: white; }
-        .rating-btn.active:hover { transform: translateY(-2px); }
+        .answer-btn.selected {
+            border-color: var(--yellow-400);
+            background: var(--yellow-50);
+            color: var(--black);
+        }
         
-        .rating-label-only { font-size: 16px; font-weight: 600; }
+        .answer-btn.selected-good {
+            border-color: var(--green);
+            background: var(--green);
+            color: white;
+        }
+        
+        .answer-btn.selected-moderate {
+            border-color: var(--amber);
+            background: var(--amber);
+            color: white;
+        }
+        
+        .answer-btn.selected-bad {
+            border-color: var(--red);
+            background: var(--red);
+            color: white;
+        }
+        
+        .slide-nav {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 48px;
+        }
+        
+        .btn-text-nav {
+            background: none;
+            border: none;
+            color: var(--grey-500);
+            font-size: 14px;
+            cursor: pointer;
+            padding: 12px 16px;
+            font-family: inherit;
+            transition: color 0.2s;
+        }
+        
+        .btn-text-nav:hover:not(:disabled) {
+            color: var(--black);
+        }
+        
+        .btn-text-nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        /* Intro slide */
+        .intro-slide .form-group {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+        
+        .intro-slide input {
+            font-size: 18px;
+            padding: 16px 20px;
+            text-align: center;
+        }
+        
+        .intro-slide .btn-start {
+            margin-top: 32px;
+            padding: 18px 48px;
+            font-size: 18px;
+        }
+        
+        /* Results slide */
+        .results-slide {
+            padding-top: 40px;
+            padding-bottom: 60px;
+        }
+        
+        .results-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .results-hero .check-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+        
+        .results-hero .check-icon svg {
+            width: 40px;
+            height: 40px;
+            color: white;
+        }
+        
+        .results-hero h1 {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+        
+        .results-hero p {
+            color: var(--grey-600);
+            font-size: 16px;
+        }
+        
+        .sap-earned-card {
+            background: var(--yellow-400);
+            border-radius: 8px;
+            padding: 20px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .sap-earned-card span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .sap-earned-card strong {
+            font-size: 32px;
+            font-family: 'Plaak', sans-serif;
+        }
+        
+        .priorities-simple {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 32px;
+        }
+        
+        .priority-box {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 24px;
+            border-left: 4px solid var(--grey-300);
+        }
+        
+        .priority-box.critical {
+            border-left-color: var(--red);
+            background: #fef2f2;
+        }
+        
+        .priority-box.moderate {
+            border-left-color: var(--amber);
+            background: #fffbeb;
+        }
+        
+        .priority-box.healthy {
+            border-left-color: var(--green);
+            background: #ecfdf5;
+        }
+        
+        .priority-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--grey-500);
+            margin-bottom: 8px;
+        }
+        
+        .priority-box h3 {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+        
+        .priority-score {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--grey-600);
+            margin-bottom: 8px;
+        }
+        
+        .priority-insight {
+            font-size: 13px;
+            color: var(--grey-600);
+            margin: 0;
+        }
+        
+        .key-insight-box {
+            background: var(--yellow-50);
+            border: 1px solid var(--yellow-300);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .key-insight-box h4 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .key-insight-box p {
+            font-size: 14px;
+            color: var(--grey-700);
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        .next-steps-box {
+            background: var(--grey-50);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 32px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .next-steps-box h4 {
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .next-steps-box ol {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--grey-700);
+            font-size: 14px;
+            line-height: 2;
+        }
+        
+        .results-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .results-actions .btn {
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 16px;
+        }
+        
+        /* Keyboard hint */
+        .keyboard-hint {
+            font-size: 12px;
+            color: var(--grey-400);
+            text-align: center;
+            margin-top: 24px;
+        }
+        
+        @media (max-width: 640px) {
+            .question-primary {
+                font-size: 24px;
+            }
+            
+            .question-context {
+                font-size: 14px;
+            }
+            
+            .answer-btn {
+                padding: 18px 24px;
+                font-size: 16px;
+            }
+            
+            .question-number-badge {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+        }
         
         /* Dysfunction Score Card (Scores Tab) */
         .dysfunction-score-card {
@@ -1439,139 +1818,106 @@
 
         <!-- TAB 2: ASSESSMENT -->
         <div id="assessment" class="tab-content">
-            <!-- Load Example Prompt -->
-            <div class="card example-prompt" id="example-prompt" style="background: linear-gradient(135deg, var(--yellow-50) 0%, var(--white) 100%); border: 2px solid var(--yellow-300);">
-                <div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
-                    <div style="flex: 1; min-width: 280px;">
-                        <h3 style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
-                            <span class="icon icon-md" style="color: var(--yellow-600);"><i data-lucide="lightbulb"></i></span>
-                            New to Team Assessments?
-                        </h3>
-                        <p style="color: var(--grey-600); margin-bottom: 16px; line-height: 1.7;">
-                            Load example responses to see how a C-level team member rated these statements. 
-                            You can review the example, then clear it to enter your own assessment.
-                        </p>
-                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                            <button class="btn btn-yellow" onclick="loadExampleAndHide()">
-                                <span class="icon icon-sm"><i data-lucide="clipboard-paste"></i></span>
-                                Load Example Assessment
-                            </button>
-                            <button class="btn btn-secondary" onclick="hideExamplePrompt()">
-                                Start Fresh
-                            </button>
-                        </div>
-                    </div>
-                    <div style="background: var(--white); border: 1px solid var(--grey-200); border-radius: 4px; padding: 16px; min-width: 200px;">
-                        <h5 style="font-size: 12px; color: var(--grey-500); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">Example includes:</h5>
-                        <ul style="font-size: 13px; color: var(--grey-600); margin: 0; padding-left: 18px; line-height: 1.8;">
-                            <li>All 15 statements rated</li>
-                            <li>Realistic team dynamics</li>
-                            <li>Shows interpretation</li>
-                        </ul>
-                    </div>
+            <!-- Assessment Entry Point -->
+            <div id="assessment-intro" class="card" style="text-align: center; padding: 60px 40px;">
+                <div class="question-number-badge" style="margin: 0 auto 24px;">
+                    <span class="icon icon-md"><i data-lucide="clipboard-check"></i></span>
                 </div>
-            </div>
-
-            <!-- YOUR INFORMATION (MOVED TO TOP) -->
-            <div class="card">
-                <h3>
-                    <span class="icon icon-md"><i data-lucide="user"></i></span>
-                    Your Information
-                </h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                    <div class="form-group" style="margin-bottom: 0;">
-                        <label>Your Name (Required)</label>
-                        <input type="text" id="assessor-name" placeholder="e.g., Sarah Chen" onchange="updateProgress()" oninput="updateProgress()">
-                    </div>
-                    <div class="form-group" style="margin-bottom: 0;">
-                        <label>Your Role (Optional)</label>
-                        <input type="text" id="assessor-role" placeholder="e.g., CFO">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Rating Scale Guide (without numbers) -->
-            <div class="card" style="background: var(--yellow-50); border-color: var(--yellow-300);">
-                <h3>
-                    <span class="icon icon-md"><i data-lucide="help-circle"></i></span>
-                    How to Rate Each Statement
-                </h3>
-                <p style="color: var(--grey-700); margin-bottom: 20px;">
-                    Rate how frequently each behavior occurs in YOUR TEAM based on the last 90 days:
+                <h2 style="margin-bottom: 12px;">Team Dysfunction Assessment</h2>
+                <p style="color: var(--grey-600); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto;">
+                    15 questions about your team's dynamics. Takes 3-5 minutes.<br>
+                    <strong>Answer honestly based on the last 90 days.</strong>
                 </p>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
-                    <div style="text-align: center; padding: 16px; background: var(--white); border-radius: 4px; border-left: 3px solid var(--green);">
-                        <div style="font-size: 18px; font-weight: 700; color: var(--green); margin-bottom: 4px;">Usually</div>
-                        <div style="font-size: 12px; color: var(--grey-600);">This happens most of the time</div>
+                
+                <div style="max-width: 400px; margin: 0 auto 32px;">
+                    <div class="form-group" style="margin-bottom: 16px;">
+                        <label style="text-align: left;">Your Name</label>
+                        <input type="text" id="assessor-name" placeholder="e.g., Sarah Chen" style="font-size: 16px; padding: 14px 16px;">
                     </div>
-                    <div style="text-align: center; padding: 16px; background: var(--white); border-radius: 4px; border-left: 3px solid var(--amber);">
-                        <div style="font-size: 18px; font-weight: 700; color: var(--amber); margin-bottom: 4px;">Sometimes</div>
-                        <div style="font-size: 12px; color: var(--grey-600);">This happens occasionally</div>
-                    </div>
-                    <div style="text-align: center; padding: 16px; background: var(--white); border-radius: 4px; border-left: 3px solid var(--red);">
-                        <div style="font-size: 18px; font-weight: 700; color: var(--red); margin-bottom: 4px;">Rarely</div>
-                        <div style="font-size: 12px; color: var(--grey-600);">This hardly ever happens</div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label style="text-align: left;">Your Role (Optional)</label>
+                        <input type="text" id="assessor-role" placeholder="e.g., CFO" style="font-size: 16px; padding: 14px 16px;">
                     </div>
                 </div>
+                
+                <button class="btn btn-primary btn-start" onclick="startAssessment()" id="start-assessment-btn" disabled style="padding: 18px 48px; font-size: 18px;">
+                    Start Assessment →
+                </button>
+                
+                <p style="margin-top: 24px; font-size: 13px; color: var(--grey-500);">
+                    or <a href="#" onclick="loadExampleAssessment(); return false;" style="color: var(--yellow-600);">load example assessment</a>
+                </p>
             </div>
-
-            <!-- Brain Juice Connection -->
-            <div class="brain-juice-box">
-                <h4>
-                    <span class="icon icon-md"><i data-lucide="book-open"></i></span>
-                    Rate YOUR TEAM's current reality (not how you wish it to be)
-                </h4>
-                <div class="brain-juice-questions">
-                    <div class="brain-juice-question"><strong>TRUST:</strong><span>Do team members admit mistakes openly?</span></div>
-                    <div class="brain-juice-question"><strong>CONFLICT:</strong><span>Passionate debates or artificial harmony?</span></div>
-                    <div class="brain-juice-question"><strong>COMMITMENT:</strong><span>Do decisions stick or get revisited?</span></div>
-                    <div class="brain-juice-question"><strong>ACCOUNTABILITY:</strong><span>Peers hold each other accountable or only CEO?</span></div>
-                    <div class="brain-juice-question"><strong>RESULTS:</strong><span>Team prioritizes "we" over "me"?</span></div>
-                </div>
-            </div>
-
-            <!-- The 15 Statement Cards -->
-            <div id="statements-container"></div>
-
-            <!-- ASSESSMENT PROGRESS (MOVED TO BOTTOM) -->
-            <div class="card">
-                <h3>
-                    <span class="icon icon-md"><i data-lucide="bar-chart-2"></i></span>
-                    Your Assessment Progress
-                </h3>
-                <div class="progress-summary">
-                    <div class="progress-item">
-                        <h4>Statements Rated</h4>
-                        <div class="value" id="statements-count">0/15</div>
-                    </div>
-                    <div class="progress-item">
-                        <h4>Completion</h4>
-                        <div class="value" id="completion-pct">0%</div>
-                    </div>
-                    <div class="progress-item">
-                        <h4>SAP Progress</h4>
-                        <div class="value" style="color: var(--yellow-600);" id="sap-progress">+0</div>
-                    </div>
-                    <div class="progress-item">
-                        <h4>Status</h4>
-                        <div class="value" id="assessment-status" style="color: var(--amber);">In Progress</div>
-                    </div>
-                </div>
-                <div class="quick-view" id="quick-view" style="display: none;">
-                    <strong style="color: var(--grey-400);">Live Scores:</strong>
-                    <div id="quick-view-items" style="display: contents;"></div>
-                </div>
-            </div>
-
-            <div class="btn-nav">
+            
+            <!-- Back to Reference -->
+            <div class="btn-nav" style="margin-top: 24px;">
                 <button class="btn btn-secondary" onclick="showTab('reference')">
                     <span class="icon icon-sm"><i data-lucide="arrow-left"></i></span>
                     Back to Reference
                 </button>
-                <button class="btn btn-primary" onclick="showTab('scores')" id="view-scores-btn" disabled>
-                    View Your Scores
-                    <span class="icon icon-sm"><i data-lucide="arrow-right"></i></span>
-                </button>
+            </div>
+        </div>
+        
+        <!-- FULL-SCREEN ASSESSMENT SLIDES (outside tab container) -->
+        <div id="assessment-fullscreen" class="assessment-fullscreen" style="display: none;">
+            <!-- Progress Header -->
+            <div class="slide-progress-header">
+                <div class="slide-progress-inner">
+                    <div class="slide-progress-text" id="slide-progress-text">Question 1 of 15</div>
+                    <div class="slide-progress-bar">
+                        <div class="slide-progress-fill" id="slide-progress-fill" style="width: 6.67%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Exit button -->
+            <button onclick="exitAssessment()" style="position: fixed; top: 20px; right: 24px; z-index: 1002; background: none; border: none; cursor: pointer; color: var(--grey-400); padding: 8px;">
+                <span class="icon icon-md"><i data-lucide="x"></i></span>
+            </button>
+            
+            <!-- Slides container - generated by JavaScript -->
+            <div id="slides-container"></div>
+            
+            <!-- Results Slide -->
+            <div id="results-slide" class="assessment-slide results-slide" style="display: none;">
+                <div class="results-hero">
+                    <div class="check-icon">
+                        <span class="icon icon-lg"><i data-lucide="check"></i></span>
+                    </div>
+                    <h1>Assessment Complete</h1>
+                    <p>Your team's top dysfunction areas identified</p>
+                </div>
+                
+                <div class="sap-earned-card">
+                    <span>Assessment Complete</span>
+                    <strong>+25 SAP</strong>
+                </div>
+                
+                <div class="priorities-simple" id="results-priorities"></div>
+                
+                <div class="key-insight-box" id="results-insight">
+                    <h4>💡 Key Insight</h4>
+                    <p id="results-insight-text"></p>
+                </div>
+                
+                <div class="next-steps-box">
+                    <h4>What Happens Next</h4>
+                    <ol>
+                        <li>Guru compiles all team assessments</li>
+                        <li>Team reviews during Fast Track hour</li>
+                        <li>Team creates action plan together</li>
+                    </ol>
+                </div>
+                
+                <div class="results-actions">
+                    <button class="btn btn-primary" onclick="exitAndGoToAction()">
+                        Continue to Action Planning →
+                    </button>
+                    <button class="btn btn-secondary" onclick="copyAssessmentLink()">
+                        <span class="icon icon-sm"><i data-lucide="link"></i></span>
+                        Copy Link to Share
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -2002,14 +2348,307 @@
             STATEMENTS.forEach(s => {
                 assessment.responses[s.id] = 0;
             });
-            renderStatements();
             updateProgress();
+            
+            // Enable start button when name is entered
+            const nameInput = document.getElementById('assessor-name');
+            if (nameInput) {
+                nameInput.addEventListener('input', function() {
+                    const startBtn = document.getElementById('start-assessment-btn');
+                    if (startBtn) {
+                        startBtn.disabled = !this.value.trim();
+                    }
+                });
+            }
             
             ['assessor-name', 'assessor-role', 'ceo-name', 'company-name', 'forum-date', 'team-share-date', 'guru-review-date', 'binding-commitment', 'signature'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.addEventListener('change', updateProgress);
                 if (el) el.addEventListener('input', updateProgress);
             });
+            
+            // Add keyboard listener for assessment
+            document.addEventListener('keydown', handleKeyPress);
+        }
+
+        // ================================================
+        // TYPEFORM-STYLE SLIDE ASSESSMENT
+        // ================================================
+        
+        let currentSlide = 0;
+        
+        function startAssessment() {
+            const nameInput = document.getElementById('assessor-name');
+            if (!nameInput?.value.trim()) {
+                nameInput.focus();
+                return;
+            }
+            
+            // Generate slides
+            generateSlides();
+            
+            // Show fullscreen assessment
+            document.getElementById('assessment-fullscreen').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Show first slide
+            currentSlide = 1;
+            showSlide(1);
+            updateSlideProgress();
+            
+            lucide.createIcons();
+        }
+        
+        function generateSlides() {
+            const container = document.getElementById('slides-container');
+            container.innerHTML = STATEMENTS.map((stmt, index) => `
+                <div id="slide-${index + 1}" class="assessment-slide ${index === 0 ? 'active' : ''}">
+                    <div class="question-number-badge">${index + 1}</div>
+                    
+                    <h2 class="question-primary">${stmt.hint}</h2>
+                    
+                    <p class="question-context">${stmt.text}</p>
+                    
+                    <div class="answer-buttons">
+                        <button class="answer-btn" onclick="answerQuestion(${stmt.id}, 1, this)" data-rating="1">
+                            Rarely
+                        </button>
+                        <button class="answer-btn" onclick="answerQuestion(${stmt.id}, 2, this)" data-rating="2">
+                            Sometimes
+                        </button>
+                        <button class="answer-btn" onclick="answerQuestion(${stmt.id}, 3, this)" data-rating="3">
+                            Usually
+                        </button>
+                    </div>
+                    
+                    <div class="slide-nav">
+                        <button class="btn-text-nav" onclick="prevSlide()" ${index === 0 ? 'disabled' : ''}>
+                            ← Back
+                        </button>
+                        <button class="btn-text-nav" onclick="skipSlide()">
+                            Skip →
+                        </button>
+                    </div>
+                    
+                    <div class="keyboard-hint">
+                        Press <strong>1</strong>, <strong>2</strong>, or <strong>3</strong> to answer
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function showSlide(num) {
+            // Hide all slides
+            document.querySelectorAll('.assessment-slide').forEach(s => {
+                s.classList.remove('active');
+                s.style.display = 'none';
+            });
+            
+            // Show current slide
+            const slide = document.getElementById(`slide-${num}`);
+            if (slide) {
+                slide.style.display = 'flex';
+                slide.classList.add('active');
+                
+                // Restore any previous answer
+                const existingAnswer = assessment.responses[num];
+                if (existingAnswer) {
+                    const btns = slide.querySelectorAll('.answer-btn');
+                    btns.forEach(btn => {
+                        btn.classList.remove('selected', 'selected-bad', 'selected-moderate', 'selected-good');
+                        if (parseInt(btn.dataset.rating) === existingAnswer) {
+                            const colorClass = existingAnswer === 1 ? 'selected-bad' : existingAnswer === 2 ? 'selected-moderate' : 'selected-good';
+                            btn.classList.add('selected', colorClass);
+                        }
+                    });
+                }
+            }
+        }
+        
+        function updateSlideProgress() {
+            const progressText = document.getElementById('slide-progress-text');
+            const progressFill = document.getElementById('slide-progress-fill');
+            
+            if (progressText) {
+                progressText.textContent = `Question ${currentSlide} of 15`;
+            }
+            if (progressFill) {
+                progressFill.style.width = `${(currentSlide / 15) * 100}%`;
+            }
+        }
+        
+        function answerQuestion(questionId, rating, btnElement) {
+            assessment.responses[questionId] = rating;
+            
+            // Visual feedback
+            const slide = btnElement.closest('.assessment-slide');
+            slide.querySelectorAll('.answer-btn').forEach(btn => {
+                btn.classList.remove('selected', 'selected-bad', 'selected-moderate', 'selected-good');
+            });
+            
+            const colorClass = rating === 1 ? 'selected-bad' : rating === 2 ? 'selected-moderate' : 'selected-good';
+            btnElement.classList.add('selected', colorClass);
+            
+            // Auto-advance after 400ms
+            setTimeout(() => {
+                if (currentSlide < 15) {
+                    nextSlide();
+                } else {
+                    showResults();
+                }
+            }, 400);
+        }
+        
+        function nextSlide() {
+            if (currentSlide < 15) {
+                currentSlide++;
+                showSlide(currentSlide);
+                updateSlideProgress();
+            } else {
+                showResults();
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+                updateSlideProgress();
+            }
+        }
+        
+        function skipSlide() {
+            nextSlide();
+        }
+        
+        function handleKeyPress(e) {
+            // Only handle when assessment is visible
+            if (document.getElementById('assessment-fullscreen').style.display !== 'block') return;
+            if (document.getElementById('results-slide').style.display === 'flex') return;
+            
+            const slide = document.querySelector('.assessment-slide.active');
+            if (!slide) return;
+            
+            if (e.key === '1' || e.key === '2' || e.key === '3') {
+                const rating = parseInt(e.key);
+                const stmtId = currentSlide;
+                const btn = slide.querySelector(`.answer-btn[data-rating="${rating}"]`);
+                if (btn) answerQuestion(stmtId, rating, btn);
+            } else if (e.key === 'ArrowRight' || e.key === 'Enter') {
+                if (assessment.responses[currentSlide]) {
+                    nextSlide();
+                }
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'Escape') {
+                exitAssessment();
+            }
+        }
+        
+        function showResults() {
+            // Calculate scores
+            const scores = calculateScores();
+            const priorities = getPrioritiesForResults(scores);
+            
+            // Render results
+            renderResults(priorities, scores);
+            
+            // Hide all question slides, show results
+            document.querySelectorAll('.assessment-slide').forEach(s => {
+                s.style.display = 'none';
+                s.classList.remove('active');
+            });
+            
+            document.getElementById('results-slide').style.display = 'flex';
+            document.getElementById('results-slide').classList.add('active');
+            
+            // Update progress bar to 100%
+            document.getElementById('slide-progress-text').textContent = 'Complete!';
+            document.getElementById('slide-progress-fill').style.width = '100%';
+            
+            // Update SAP
+            updateProgress();
+            
+            lucide.createIcons();
+        }
+        
+        function getPrioritiesForResults(scores) {
+            return Object.entries(scores)
+                .map(([id, score]) => {
+                    const dysfunction = DYSFUNCTIONS.find(d => d.id === id);
+                    return {
+                        id,
+                        name: dysfunction.name,
+                        score,
+                        status: score >= 8 ? 'healthy' : score >= 6 ? 'moderate' : 'critical',
+                        insight: generateInsight(id, score)
+                    };
+                })
+                .sort((a, b) => a.score - b.score)
+                .slice(0, 3);
+        }
+        
+        function generateInsight(dysfunctionId, score) {
+            const insights = {
+                trust: score < 6 ? "Low vulnerability. Build psychological safety first." : "Moderate trust. Continue vulnerability exercises.",
+                conflict: score < 6 ? "Artificial harmony. Establish debate norms." : "Some healthy conflict. Encourage more.",
+                commitment: score < 6 ? "Decisions don't stick. Team needs clarity protocols." : "Moderate commitment. Clarify decisions better.",
+                accountability: score < 6 ? "Peers avoid confrontation. Create peer accountability culture." : "Some peer accountability. Make it systematic.",
+                results: score < 6 ? "Individual focus trumps team goals. Realign incentives." : "Moderate team focus. Celebrate collective wins."
+            };
+            return insights[dysfunctionId] || "Needs attention.";
+        }
+        
+        function renderResults(priorities, scores) {
+            // Render priority boxes
+            const prioritiesContainer = document.getElementById('results-priorities');
+            prioritiesContainer.innerHTML = priorities.map((p, i) => `
+                <div class="priority-box ${p.status}">
+                    <div class="priority-label">Priority #${i + 1}</div>
+                    <h3>${p.name}</h3>
+                    <div class="priority-score">${p.score}/9</div>
+                    <p class="priority-insight">${p.insight}</p>
+                </div>
+            `).join('');
+            
+            // Render key insight
+            const topPriority = priorities[0];
+            document.getElementById('results-insight-text').innerHTML = 
+                `Your team's biggest gap is <strong>${topPriority.name.toLowerCase()}</strong> (${topPriority.score}/9). ${topPriority.insight} This is where you should focus your action planning.`;
+        }
+        
+        function exitAssessment() {
+            document.getElementById('assessment-fullscreen').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        
+        function exitAndGoToAction() {
+            exitAssessment();
+            showTab('action');
+            renderActionTab();
+        }
+        
+        function loadExampleAssessment() {
+            // Load example data
+            const example = {
+                1: 2, 2: 1, 3: 3, 4: 2, 5: 3,
+                6: 2, 7: 2, 8: 1, 9: 3, 10: 2,
+                11: 2, 12: 3, 13: 1, 14: 2, 15: 3
+            };
+            
+            Object.entries(example).forEach(([id, rating]) => {
+                assessment.responses[parseInt(id)] = rating;
+            });
+            
+            document.getElementById('assessor-name').value = 'Sarah Chen';
+            document.getElementById('assessor-role').value = 'CFO';
+            
+            // Enable and click start
+            document.getElementById('start-assessment-btn').disabled = false;
+            startAssessment();
+            
+            // Jump to results
+            setTimeout(() => showResults(), 100);
         }
 
         // Tab Navigation
