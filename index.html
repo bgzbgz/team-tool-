@@ -2042,8 +2042,8 @@
                 </h3>
                 
                 <div class="commitment-text">
-                    I, <input type="text" id="ceo-name" placeholder="Your name" style="width: 180px;">, 
-                    as CEO of <input type="text" id="company-name" placeholder="Company name" style="width: 200px;">, 
+                    I, <input type="text" id="ceo-name" placeholder="Your name" style="width: 180px;" oninput="updateProgress()">, 
+                    as CEO of <input type="text" id="company-name" placeholder="Company name" style="width: 200px;" oninput="updateProgress()">, 
                     commit to implementing these 3 actions.
                 </div>
 
@@ -2065,7 +2065,7 @@
                         <span>Reviewing progress monthly with my Guru (scheduled for <input type="date" id="guru-review-date">)</span>
                     </div>
                     <div class="checkbox-item" style="margin-top: 20px; background: var(--grey-50); padding: 16px; border-radius: 4px;">
-                        <input type="checkbox" id="binding-commitment">
+                        <input type="checkbox" id="binding-commitment" onchange="updateProgress()">
                         <span><strong>I understand this is a BINDING COMMITMENT witnessed by my Forum peers</strong></span>
                     </div>
                 </div>
@@ -2097,7 +2097,7 @@
                         <span class="icon icon-sm"><i data-lucide="pen-tool"></i></span>
                         Digital Signature (type your full name)
                     </label>
-                    <input type="text" id="signature" placeholder="Type your full name to sign">
+                    <input type="text" id="signature" placeholder="Type your full name to sign" oninput="updateProgress()" onchange="updateProgress()">
                 </div>
             </div>
 
