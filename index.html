@@ -1340,8 +1340,8 @@
             background: var(--green);
         }
         
-        /* Commitment */
-        .commitment-section {
+        /* Commitment (removed) */
+        /* .commitment-section {
             background: var(--white);
             border: 1px solid var(--yellow-300);
             border-radius: 4px;
@@ -2613,78 +2613,6 @@
                 <div id="www-actions-container"></div>
             </div>
 
-            <div class="commitment-section" id="commitment-section" style="display: none;">
-                <div style="background: var(--green); color: white; padding: 16px 20px; border-radius: 4px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px;">
-                    <span class="icon icon-md"><i data-lucide="check-circle"></i></span>
-                    <div>
-                        <strong style="font-size: 14px;">All Actions Complete!</strong>
-                        <p style="margin: 0; font-size: 13px; opacity: 0.9;">Now make your public commitment below to lock in accountability.</p>
-                    </div>
-                </div>
-                <h3>
-                    <span class="icon icon-md"><i data-lucide="award"></i></span>
-                    Public Commitment Declaration
-                </h3>
-                
-                <div class="commitment-text">
-                    I, <input type="text" id="ceo-name" placeholder="Your name" style="width: 180px;" oninput="updateProgress()">, 
-                    as CEO of <input type="text" id="company-name" placeholder="Company name" style="width: 200px;" oninput="updateProgress()">, 
-                    commit to implementing these 3 actions.
-                </div>
-
-                <div class="commitment-checkboxes">
-                    <div class="checkbox-item">
-                        <span class="icon icon-sm"><i data-lucide="check"></i></span>
-                        <span>Implementing these 3 actions starting <strong id="first-action-date">[set date above]</strong></span>
-                    </div>
-                    <div class="checkbox-item">
-                        <span class="icon icon-sm"><i data-lucide="check"></i></span>
-                        <span>Presenting results at Forum meeting on <input type="date" id="forum-date"></span>
-                    </div>
-                    <div class="checkbox-item">
-                        <span class="icon icon-sm"><i data-lucide="check"></i></span>
-                        <span>Sharing with my leadership team on <input type="date" id="team-share-date"></span>
-                    </div>
-                    <div class="checkbox-item">
-                        <span class="icon icon-sm"><i data-lucide="check"></i></span>
-                        <span>Reviewing progress monthly with my Guru (scheduled for <input type="date" id="guru-review-date">)</span>
-                    </div>
-                    <div class="checkbox-item" style="margin-top: 20px; background: var(--grey-50); padding: 16px; border-radius: 4px;">
-                        <input type="checkbox" id="binding-commitment" onchange="updateProgress()">
-                        <span><strong>I understand this is a BINDING COMMITMENT witnessed by my Forum peers</strong></span>
-                    </div>
-                </div>
-
-                <div class="forum-peers">
-                    <h5>
-                        <span class="icon icon-sm"><i data-lucide="megaphone"></i></span>
-                        This commitment will be visible to:
-                    </h5>
-                    <div class="peers-list">
-                        <div class="peer-item">Maria Santos - CEO, TechCorp Manufacturing</div>
-                        <div class="peer-item">John Peterson - CEO, HealthPlus Medical</div>
-                        <div class="peer-item">Sarah Chen - CEO, GreenEnergy Solutions</div>
-                        <div class="peer-item">Mike Rodriguez - CEO, DataFlow Systems</div>
-                        <div class="peer-item">Lisa Kumar - CEO, CloudFirst Technologies</div>
-                        <div class="peer-item">Tom Anderson - CEO, RetailMax Group</div>
-                        <div class="peer-item">Jennifer Lee - CEO, BuildRight Construction</div>
-                        <div class="peer-item">David Park - CEO, FinanceHub</div>
-                    </div>
-                </div>
-
-                <div class="guru-note">
-                    <span class="icon icon-sm"><i data-lucide="user"></i></span>
-                    Your Guru will review this assessment before your Forum presentation
-                </div>
-
-                <div class="signature-field">
-                    <label>
-                        <span class="icon icon-sm"><i data-lucide="pen-tool"></i></span>
-                        Digital Signature (type your full name)
-                    </label>
-                    <input type="text" id="signature" placeholder="Type your full name to sign" oninput="updateProgress()" onchange="updateProgress()">
-                </div>
-            </div>
 
             <div class="btn-nav">
                 <button class="btn btn-secondary" onclick="showTab('assessment')">
@@ -2940,7 +2868,7 @@
                 });
             }
             
-            ['assessor-name', 'assessor-role', 'ceo-name', 'company-name', 'forum-date', 'team-share-date', 'guru-review-date', 'binding-commitment', 'signature'].forEach(id => {
+            ['assessor-name', 'assessor-role'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.addEventListener('change', updateProgress);
                 if (el) el.addEventListener('input', updateProgress);
@@ -3487,8 +3415,7 @@
         function checkDashboardComplete() {
             // Must complete all 3 WWW actions
             const allActionsComplete = actions.slice(0, 3).every(a => a.what && a.who && a.when);
-            const commitmentComplete = document.getElementById('binding-commitment')?.checked && document.getElementById('signature')?.value.trim();
-            return allActionsComplete && commitmentComplete;
+            return allActionsComplete;
         }
 
         function calculateFTP() {
@@ -3499,8 +3426,6 @@
             actions.forEach(a => {
                 if (a.action && a.owner && a.frequency && a.startDate && a.successMetric) ftp += 25;
             });
-            // Commitment signed: +25
-            if (document.getElementById('binding-commitment')?.checked && document.getElementById('signature')?.value.trim()) ftp += 25;
             return ftp;
         }
 
@@ -3688,24 +3613,6 @@
             // Check if all 3 actions are complete
             const allActionsComplete = actions.slice(0, 3).every(a => a.what && a.who && a.when);
             
-            const commitmentSection = document.getElementById('commitment-section');
-            
-            if (commitmentSection) {
-                if (allActionsComplete) {
-                    commitmentSection.style.display = 'block';
-                    // Scroll to commitment section smoothly (only if it just became visible)
-                    if (!commitmentSection.dataset.shown) {
-                        commitmentSection.dataset.shown = 'true';
-                        setTimeout(() => {
-                            commitmentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }, 100);
-                    }
-                } else {
-                    commitmentSection.style.display = 'none';
-                    commitmentSection.dataset.shown = '';
-                }
-            }
-            
             lucide.createIcons();
         }
 
@@ -3732,24 +3639,6 @@
             if (!actions[index]) actions[index] = { what: '', who: '', when: '' };
             actions[index][field] = value;
             
-            // Check if all 3 actions are complete and show commitment section
-            const allActionsComplete = actions.slice(0, 3).every(a => a.what && a.who && a.when);
-            const commitmentSection = document.getElementById('commitment-section');
-            
-            if (commitmentSection) {
-                if (allActionsComplete) {
-                    commitmentSection.style.display = 'block';
-                    if (!commitmentSection.dataset.shown) {
-                        commitmentSection.dataset.shown = 'true';
-                        setTimeout(() => {
-                            commitmentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }, 100);
-                    }
-                } else {
-                    commitmentSection.style.display = 'none';
-                    commitmentSection.dataset.shown = '';
-                }
-            }
             
             updateProgress();
         }
