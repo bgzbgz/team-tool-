@@ -214,6 +214,179 @@
         
         .card h3 .icon { color: var(--grey-600); }
         
+        /* Reference Slides */
+        .ref-slide {
+            display: none;
+            min-height: calc(100vh - 200px);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ref-slide.active {
+            display: flex;
+        }
+        
+        .slide-container {
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            padding: 40px 24px;
+        }
+        
+        .slide-badge {
+            width: 80px;
+            height: 80px;
+            background: var(--yellow-400);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+        }
+        
+        .slide-badge.warning {
+            background: var(--red);
+            color: white;
+        }
+        
+        .slide-badge .icon {
+            color: var(--black);
+        }
+        
+        .slide-badge.warning .icon {
+            color: white;
+        }
+        
+        .slide-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--black);
+        }
+        
+        .slide-subtitle {
+            font-size: 14px;
+            color: var(--grey-500);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .slide-description {
+            font-size: 18px;
+            color: var(--grey-600);
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+        
+        .scope-grid-slide {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 48px;
+            text-align: left;
+        }
+        
+        .scope-item-slide {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            background: var(--grey-50);
+            border-radius: 8px;
+        }
+        
+        .scope-icon-slide {
+            width: 48px;
+            height: 48px;
+            background: var(--yellow-400);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .scope-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .scope-text strong {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--black);
+        }
+        
+        .scope-text span {
+            font-size: 14px;
+            color: var(--grey-600);
+        }
+        
+        .btn-slide {
+            padding: 18px 48px;
+            font-size: 18px;
+        }
+        
+        .mistakes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 48px;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .mistake-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 24px;
+            background: var(--grey-50);
+            border-radius: 8px;
+            border-left: 4px solid var(--red);
+        }
+        
+        .mistake-number {
+            width: 36px;
+            height: 36px;
+            background: var(--red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .mistake-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .mistake-text strong {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--black);
+        }
+        
+        .mistake-text span {
+            font-size: 14px;
+            color: var(--grey-600);
+        }
+        
+        .slide-nav-btns {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+        
         /* Hero */
         .hero {
             background: var(--black);
@@ -1655,6 +1828,11 @@
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .priority-cards { grid-template-columns: 1fr; }
             .action-fields { grid-template-columns: 1fr; }
+            .slide-title { font-size: 28px; }
+            .slide-description { font-size: 16px; }
+            .scope-grid-slide { grid-template-columns: 1fr; }
+            .slide-nav-btns { flex-direction: column; }
+            .btn-slide { width: 100%; }
             .action-tracker-row { grid-template-columns: 1fr; gap: 8px; }
             .sliders-grid { grid-template-columns: 1fr 1fr; }
             .sprint-complete-dates { grid-template-columns: 1fr; }
@@ -1705,114 +1883,100 @@
 
         <!-- TAB 1: REFERENCE -->
         <div id="reference" class="tab-content active">
-            <div class="hero">
-                <div class="hero-header">
-                    <span class="icon icon-lg"><i data-lucide="lightbulb"></i></span>
-                    <h1>Brain Juice Applied</h1>
-                </div>
-                <p class="hero-subtitle">Sprint 5 of 32 | Module: Individual & Company Identity</p>
-                <p>Based on Patrick Lencioni's Five Dysfunctions Framework. Apply what you've learned to assess YOUR team.</p>
-            </div>
-
-            <div class="card">
-                <h3>
-                    <span class="icon icon-md"><i data-lucide="clipboard-list"></i></span>
-                    Assessment Scope
-                </h3>
-                <div class="scope-grid">
-                    <div class="scope-item">
-                        <div class="scope-icon"><i data-lucide="users"></i></div>
-                        <div>
-                            <h4>Scope</h4>
-                            <p>Your C-level team (5-8 direct reports)</p>
+            <!-- SLIDE 1: Brain Juice Applied + Assessment Scope -->
+            <div id="ref-slide-1" class="ref-slide active">
+                <div class="slide-container">
+                    <div class="slide-badge">
+                        <span class="icon icon-lg"><i data-lucide="lightbulb"></i></span>
+                    </div>
+                    
+                    <h1 class="slide-title">Brain Juice Applied</h1>
+                    <p class="slide-subtitle">Sprint 5 of 32 | Module: Individual & Company Identity</p>
+                    <p class="slide-description">Based on Patrick Lencioni's Five Dysfunctions Framework.<br>Apply what you've learned to assess YOUR team.</p>
+                    
+                    <div class="scope-grid-slide">
+                        <div class="scope-item-slide">
+                            <div class="scope-icon-slide"><i data-lucide="users"></i></div>
+                            <div class="scope-text">
+                                <strong>Scope</strong>
+                                <span>Your C-level team (5-8 direct reports)</span>
+                            </div>
+                        </div>
+                        <div class="scope-item-slide">
+                            <div class="scope-icon-slide"><i data-lucide="calendar"></i></div>
+                            <div class="scope-text">
+                                <strong>Time Frame</strong>
+                                <span>Last 90 days observed</span>
+                            </div>
+                        </div>
+                        <div class="scope-item-slide">
+                            <div class="scope-icon-slide"><i data-lucide="eye"></i></div>
+                            <div class="scope-text">
+                                <strong>Perspective</strong>
+                                <span>Your honest assessment</span>
+                            </div>
+                        </div>
+                        <div class="scope-item-slide">
+                            <div class="scope-icon-slide"><i data-lucide="x-circle"></i></div>
+                            <div class="scope-text">
+                                <strong>Exclude</strong>
+                                <span>Yourself, board, indirect reports</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="scope-item">
-                        <div class="scope-icon"><i data-lucide="calendar"></i></div>
-                        <div>
-                            <h4>Time Frame</h4>
-                            <p>Last 90 days observed</p>
+                    
+                    <button class="btn btn-primary btn-slide" onclick="nextRefSlide()">
+                        Continue
+                        <span class="icon icon-sm"><i data-lucide="arrow-right"></i></span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- SLIDE 2: Common Mistakes to Avoid -->
+            <div id="ref-slide-2" class="ref-slide">
+                <div class="slide-container">
+                    <div class="slide-badge warning">
+                        <span class="icon icon-lg"><i data-lucide="alert-triangle"></i></span>
+                    </div>
+                    
+                    <h1 class="slide-title">Common Mistakes to Avoid</h1>
+                    <p class="slide-subtitle">Before you start, keep these in mind</p>
+                    
+                    <div class="mistakes-list">
+                        <div class="mistake-item">
+                            <div class="mistake-number">1</div>
+                            <div class="mistake-text">
+                                <strong>Don't rate how you WANT team to be</strong>
+                                <span>Rate CURRENT reality only</span>
+                            </div>
+                        </div>
+                        <div class="mistake-item">
+                            <div class="mistake-number">2</div>
+                            <div class="mistake-text">
+                                <strong>Rate based on OBSERVED BEHAVIORS only</strong>
+                                <span>Not assumptions or intentions</span>
+                            </div>
+                        </div>
+                        <div class="mistake-item">
+                            <div class="mistake-number">3</div>
+                            <div class="mistake-text">
+                                <strong>Don't confuse absence of dysfunction with health</strong>
+                                <span>Look for active positive behaviors</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="scope-item">
-                        <div class="scope-icon"><i data-lucide="eye"></i></div>
-                        <div>
-                            <h4>Perspective</h4>
-                            <p>Your honest assessment as CEO</p>
-                        </div>
-                    </div>
-                    <div class="scope-item">
-                        <div class="scope-icon"><i data-lucide="x-circle"></i></div>
-                        <div>
-                            <h4>Exclude</h4>
-                            <p>Yourself, board, indirect reports</p>
-                        </div>
+                    
+                    <div class="slide-nav-btns">
+                        <button class="btn btn-secondary" onclick="prevRefSlide()">
+                            <span class="icon icon-sm"><i data-lucide="arrow-left"></i></span>
+                            Back
+                        </button>
+                        <button class="btn btn-primary btn-slide" onclick="showTab('assessment')">
+                            Begin Your Assessment
+                            <span class="icon icon-sm"><i data-lucide="arrow-right"></i></span>
+                        </button>
                     </div>
                 </div>
-            </div>
-
-            <div class="warning-card">
-                <h4>
-                    <span class="icon icon-md"><i data-lucide="alert-triangle"></i></span>
-                    Common Mistakes to Avoid
-                </h4>
-                <ul>
-                    <li>Don't rate how you WANT team to be - rate CURRENT reality</li>
-                    <li>Rate based on OBSERVED BEHAVIORS only</li>
-                    <li>Don't confuse absence of dysfunction with presence of health</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h3>
-                    <span class="icon icon-md"><i data-lucide="check-circle"></i></span>
-                    80/20 Key Learnings
-                </h3>
-                <div class="key-learning">
-                    <span class="check-circle"><i data-lucide="check"></i></span>
-                    <span>Building trust is fundamental - the foundation of all teamwork</span>
-                </div>
-                <div class="key-learning">
-                    <span class="check-circle"><i data-lucide="check"></i></span>
-                    <span>Constructive conflict drives innovation - embrace healthy debate</span>
-                </div>
-                <div class="key-learning">
-                    <span class="check-circle"><i data-lucide="check"></i></span>
-                    <span>Commitment leads to action - buy-in creates momentum</span>
-                </div>
-                <div class="key-learning">
-                    <span class="check-circle"><i data-lucide="check"></i></span>
-                    <span>Accountability sustains progress - peers hold each other to standards</span>
-                </div>
-                <div class="key-learning">
-                    <span class="check-circle"><i data-lucide="check"></i></span>
-                    <span>Focus on collective results - "we" over "me" wins</span>
-                </div>
-            </div>
-
-            <div class="expandable" onclick="this.classList.toggle('open')">
-                <div class="expandable-header">
-                    <span style="display:flex; align-items:center; gap:10px;">
-                        <span class="icon icon-sm"><i data-lucide="target"></i></span>
-                        Tune In Questions (From Brain Juice)
-                    </span>
-                    <span class="icon icon-sm"><i data-lucide="chevron-down"></i></span>
-                </div>
-                <div class="expandable-content">
-                    <ol style="margin-left: 20px; color: var(--grey-700);">
-                        <li style="margin-bottom: 12px;">What are the most significant challenges your team currently faces in achieving its goals?</li>
-                        <li style="margin-bottom: 12px;">How do you think trust, communication, and accountability influence your team's performance?</li>
-                        <li>Why is it important for all team members to be aligned with the company's vision and values?</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div class="btn-nav">
-                <div></div>
-                <button class="btn btn-primary" onclick="showTab('assessment')">
-                    Begin Your Assessment
-                    <span class="icon icon-sm"><i data-lucide="arrow-right"></i></span>
-                </button>
             </div>
         </div>
 
@@ -2643,6 +2807,23 @@
             
             // Jump to results
             setTimeout(() => showResults(), 100);
+        }
+
+        // Reference Slide Navigation
+        let currentRefSlide = 1;
+        
+        function nextRefSlide() {
+            document.getElementById('ref-slide-' + currentRefSlide).classList.remove('active');
+            currentRefSlide = 2;
+            document.getElementById('ref-slide-' + currentRefSlide).classList.add('active');
+            lucide.createIcons();
+        }
+        
+        function prevRefSlide() {
+            document.getElementById('ref-slide-' + currentRefSlide).classList.remove('active');
+            currentRefSlide = 1;
+            document.getElementById('ref-slide-' + currentRefSlide).classList.add('active');
+            lucide.createIcons();
         }
 
         // Tab Navigation
