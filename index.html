@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fast Track - Team Dysfunction Assessment | Sprint 5 of 32</title>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         @font-face {
             font-family: 'Plaak';
@@ -2207,11 +2209,41 @@
         <div class="guru-container">
             <!-- Import Section -->
             <div class="import-section" id="import-section">
-                <h3>
-                    <span class="icon icon-md"><i data-lucide="download"></i></span>
-                    Import Team Assessments
+                <!-- Database Load Option -->
+                <div style="background: var(--yellow-50); border: 1px solid var(--yellow-300); border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+                    <h3 style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                        <span class="icon icon-md" style="color: var(--yellow-600);"><i data-lucide="database"></i></span>
+                        Load from Database
+                        <span style="font-size: 11px; background: var(--green); color: white; padding: 2px 8px; border-radius: 10px;">Recommended</span>
+                    </h3>
+                    <p style="color: var(--grey-600); margin-bottom: 16px; font-size: 13px;">
+                        Select a company to automatically load all submitted assessments.
+                    </p>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <select id="company-select" style="flex: 1; padding: 12px 16px; border: 1px solid var(--grey-300); border-radius: 4px; font-size: 14px; background: white;">
+                            <option value="">Select a company...</option>
+                        </select>
+                        <button class="btn btn-yellow" onclick="loadCompanyAssessments()">
+                            <span class="icon icon-sm"><i data-lucide="download-cloud"></i></span>
+                            Load Team
+                        </button>
+                    </div>
+                    <div id="db-load-status" style="margin-top: 12px; font-size: 12px; display: none;"></div>
+                </div>
+                
+                <!-- Divider -->
+                <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+                    <div style="flex: 1; height: 1px; background: var(--grey-300);"></div>
+                    <span style="font-size: 12px; color: var(--grey-500);">or import manually</span>
+                    <div style="flex: 1; height: 1px; background: var(--grey-300);"></div>
+                </div>
+                
+                <!-- Manual Code Import -->
+                <h3 style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                    <span class="icon icon-md"><i data-lucide="clipboard-paste"></i></span>
+                    Import via Code
                 </h3>
-                <p style="color: var(--grey-600); margin-bottom: 20px;">
+                <p style="color: var(--grey-600); margin-bottom: 20px; font-size: 13px;">
                     Paste submission codes from team members below. Each code contains their complete assessment data.
                 </p>
                 <textarea class="import-textarea" id="import-code-input" placeholder="Paste a team member's submission code here..."></textarea>
@@ -2400,13 +2432,60 @@
                 </p>
                 
                 <div style="max-width: 400px; margin: 0 auto 32px;">
-                    <div class="form-group" style="margin-bottom: 16px;">
-                        <label style="text-align: left;">Your Name</label>
-                        <input type="text" id="assessor-name" placeholder="e.g., Sarah Chen" style="font-size: 16px; padding: 14px 16px;">
+                    <!-- Email Login (Database Mode) -->
+                    <div id="email-login-section" style="margin-bottom: 24px; padding: 20px; background: var(--yellow-50); border: 1px solid var(--yellow-300); border-radius: 8px;">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                            <span class="icon icon-sm" style="color: var(--yellow-600);"><i data-lucide="database"></i></span>
+                            <label style="text-align: left; font-weight: 600; color: var(--grey-800); margin: 0;">Login with Email</label>
+                            <span style="font-size: 11px; background: var(--green); color: white; padding: 2px 8px; border-radius: 10px;">Saves to Database</span>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="email" id="user-email" placeholder="your.email@company.com" style="flex: 1; font-size: 14px; padding: 12px 14px;">
+                            <button class="btn btn-yellow" onclick="loginWithEmail()" style="padding: 12px 16px; white-space: nowrap;">
+                                <span class="icon icon-sm"><i data-lucide="log-in"></i></span>
+                                Login
+                            </button>
+                        </div>
+                        <div id="login-status" style="margin-top: 10px; font-size: 12px; display: none;"></div>
+                        <p style="margin-top: 10px; font-size: 11px; color: var(--grey-500);">
+                            Your assessment will be saved automatically. Your Guru will see results instantly.
+                        </p>
                     </div>
-                    <div class="form-group" style="margin-bottom: 0;">
-                        <label style="text-align: left;">Your Role (Optional)</label>
-                        <input type="text" id="assessor-role" placeholder="e.g., CFO" style="font-size: 16px; padding: 14px 16px;">
+                    
+                    <!-- Logged In Status -->
+                    <div id="logged-in-status" style="display: none; margin-bottom: 24px; padding: 16px; background: var(--green); color: white; border-radius: 8px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span class="icon icon-md"><i data-lucide="check-circle"></i></span>
+                                <div>
+                                    <strong id="logged-in-name">Sarah Chen</strong>
+                                    <span id="logged-in-role" style="opacity: 0.9;"></span>
+                                    <div style="font-size: 12px; opacity: 0.9;" id="logged-in-company"></div>
+                                </div>
+                            </div>
+                            <button onclick="logoutUser()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                                Change User
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Divider -->
+                    <div id="or-divider" style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                        <div style="flex: 1; height: 1px; background: var(--grey-300);"></div>
+                        <span style="font-size: 12px; color: var(--grey-500);">or continue without login</span>
+                        <div style="flex: 1; height: 1px; background: var(--grey-300);"></div>
+                    </div>
+                    
+                    <!-- Manual Entry (Offline Mode) -->
+                    <div id="manual-entry-section">
+                        <div class="form-group" style="margin-bottom: 16px;">
+                            <label style="text-align: left;">Your Name</label>
+                            <input type="text" id="assessor-name" placeholder="e.g., Sarah Chen" style="font-size: 16px; padding: 14px 16px;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label style="text-align: left;">Your Role (Optional)</label>
+                            <input type="text" id="assessor-role" placeholder="e.g., CFO" style="font-size: 16px; padding: 14px 16px;">
+                        </div>
                     </div>
                 </div>
                 
@@ -2783,6 +2862,165 @@
 
 
     <script>
+        // ================================================
+        // SUPABASE CONNECTION
+        // ================================================
+        const SUPABASE_URL = 'https://yhcwjlqjbwhijxzdgvoz.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InloY3dqbHFqYndoaWp4emRndm96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ2NTg5NjMsImV4cCI6MjA4MDIzNDk2M30.ACAd3W7sCnJvkmsfmzW10_Z-sKxLh03zEArfOwavKZI';
+        
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // Current user/company state (populated after login)
+        let currentUser = null;
+        let currentCompany = null;
+        let isOnlineMode = false; // Toggle between offline (code-based) and online (database) mode
+
+        // ================================================
+        // DATABASE FUNCTIONS
+        // ================================================
+        
+        // Look up user by email
+        async function lookupUserByEmail(email) {
+            const { data, error } = await supabase
+                .from('users')
+                .select('*, companies(*)')
+                .eq('email', email.toLowerCase().trim())
+                .single();
+            
+            if (error) {
+                console.log('User lookup error:', error);
+                return null;
+            }
+            return data;
+        }
+        
+        // Save assessment to database
+        async function saveAssessmentToDatabase() {
+            if (!currentUser || !currentCompany) {
+                console.log('No user logged in, cannot save to database');
+                return { success: false, error: 'Not logged in' };
+            }
+            
+            const scores = calculateScores();
+            
+            // Check if submission already exists for this user/sprint
+            const { data: existing } = await supabase
+                .from('submissions')
+                .select('id')
+                .eq('user_id', currentUser.id)
+                .eq('sprint_id', 5)
+                .single();
+            
+            let result;
+            if (existing) {
+                // Update existing submission
+                result = await supabase
+                    .from('submissions')
+                    .update({
+                        responses: assessment.responses,
+                        scores: scores,
+                        ftp_earned: calculateFTP(),
+                        submitted_at: new Date().toISOString()
+                    })
+                    .eq('id', existing.id);
+            } else {
+                // Insert new submission
+                result = await supabase
+                    .from('submissions')
+                    .insert({
+                        user_id: currentUser.id,
+                        company_id: currentCompany.id,
+                        sprint_id: 5,
+                        responses: assessment.responses,
+                        scores: scores,
+                        ftp_earned: calculateFTP()
+                    });
+            }
+            
+            if (result.error) {
+                console.error('Save error:', result.error);
+                return { success: false, error: result.error.message };
+            }
+            
+            return { success: true };
+        }
+        
+        // Load team assessments for Guru Mode
+        async function loadTeamAssessmentsFromDatabase(companyId) {
+            const { data, error } = await supabase
+                .from('submissions')
+                .select('*, users(name, role)')
+                .eq('company_id', companyId)
+                .eq('sprint_id', 5);
+            
+            if (error) {
+                console.error('Load team error:', error);
+                return [];
+            }
+            
+            // Transform to match existing format
+            return data.map(sub => ({
+                name: sub.users?.name || 'Unknown',
+                role: sub.users?.role || '',
+                timestamp: sub.submitted_at,
+                scores: sub.scores,
+                responses: sub.responses
+            }));
+        }
+        
+        // Save actions to database
+        async function saveActionsToDatabase() {
+            if (!currentCompany) return;
+            
+            for (let i = 0; i < 3; i++) {
+                const action = actions[i];
+                if (action.what || action.who || action.when) {
+                    await supabase
+                        .from('actions')
+                        .upsert({
+                            company_id: currentCompany.id,
+                            sprint_id: 5,
+                            action_number: i + 1,
+                            what: action.what,
+                            who: action.who,
+                            when: action.when
+                        }, {
+                            onConflict: 'company_id,sprint_id,action_number'
+                        });
+                }
+            }
+        }
+        
+        // Save dysfunction notes to database
+        async function saveDysfunctionNotesToDatabase() {
+            if (!currentCompany) return;
+            
+            for (const [dysfunction, note] of Object.entries(dysfunctionNotes)) {
+                if (note) {
+                    await supabase
+                        .from('dysfunction_notes')
+                        .upsert({
+                            company_id: currentCompany.id,
+                            sprint_id: 5,
+                            dysfunction: dysfunction,
+                            note: note
+                        }, {
+                            onConflict: 'company_id,sprint_id,dysfunction'
+                        });
+                }
+            }
+        }
+        
+        // Get all companies (for Guru dropdown)
+        async function getAllCompanies() {
+            const { data, error } = await supabase
+                .from('companies')
+                .select('*')
+                .order('name');
+            
+            return error ? [] : data;
+        }
+
         // Initialize Lucide icons
         document.addEventListener('DOMContentLoaded', function() {
             lucide.createIcons();
@@ -2876,6 +3114,104 @@
             
             // Add keyboard listener for assessment
             document.addEventListener('keydown', handleKeyPress);
+            
+            // Add enter key listener for email login
+            const emailInput = document.getElementById('user-email');
+            if (emailInput) {
+                emailInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        loginWithEmail();
+                    }
+                });
+            }
+        }
+
+        // ================================================
+        // USER LOGIN/LOGOUT
+        // ================================================
+        
+        async function loginWithEmail() {
+            const emailInput = document.getElementById('user-email');
+            const email = emailInput?.value.trim();
+            const statusEl = document.getElementById('login-status');
+            
+            if (!email) {
+                statusEl.style.display = 'block';
+                statusEl.style.color = 'var(--red)';
+                statusEl.textContent = 'Please enter your email address';
+                return;
+            }
+            
+            // Show loading state
+            statusEl.style.display = 'block';
+            statusEl.style.color = 'var(--grey-600)';
+            statusEl.textContent = 'Looking up your account...';
+            
+            try {
+                const user = await lookupUserByEmail(email);
+                
+                if (user) {
+                    // User found - enable online mode
+                    currentUser = user;
+                    currentCompany = user.companies;
+                    isOnlineMode = true;
+                    
+                    // Update UI
+                    document.getElementById('assessor-name').value = user.name;
+                    document.getElementById('assessor-role').value = user.role || '';
+                    
+                    // Show logged in status
+                    document.getElementById('email-login-section').style.display = 'none';
+                    document.getElementById('or-divider').style.display = 'none';
+                    document.getElementById('manual-entry-section').style.display = 'none';
+                    
+                    const loggedInStatus = document.getElementById('logged-in-status');
+                    loggedInStatus.style.display = 'block';
+                    document.getElementById('logged-in-name').textContent = user.name;
+                    document.getElementById('logged-in-role').textContent = user.role ? ` - ${user.role}` : '';
+                    document.getElementById('logged-in-company').textContent = currentCompany?.name || '';
+                    
+                    // Enable start button
+                    document.getElementById('start-assessment-btn').disabled = false;
+                    
+                    // Show success toast
+                    showToastMessage(`✓ Welcome, ${user.name}! Your progress will be saved automatically.`);
+                    
+                    lucide.createIcons();
+                } else {
+                    // User not found
+                    statusEl.style.color = 'var(--red)';
+                    statusEl.innerHTML = `
+                        <strong>Email not found.</strong><br>
+                        <span style="color: var(--grey-600);">Ask your Guru to add you, or continue without login below.</span>
+                    `;
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                statusEl.style.color = 'var(--red)';
+                statusEl.textContent = 'Connection error. Please try again or continue without login.';
+            }
+        }
+        
+        function logoutUser() {
+            currentUser = null;
+            currentCompany = null;
+            isOnlineMode = false;
+            
+            // Reset UI
+            document.getElementById('email-login-section').style.display = 'block';
+            document.getElementById('or-divider').style.display = 'flex';
+            document.getElementById('manual-entry-section').style.display = 'block';
+            document.getElementById('logged-in-status').style.display = 'none';
+            document.getElementById('user-email').value = '';
+            document.getElementById('login-status').style.display = 'none';
+            
+            // Clear name/role
+            document.getElementById('assessor-name').value = '';
+            document.getElementById('assessor-role').value = '';
+            document.getElementById('start-assessment-btn').disabled = true;
+            
+            lucide.createIcons();
         }
 
         // ================================================
@@ -3052,7 +3388,7 @@
             }
         }
         
-        function showResults() {
+        async function showResults() {
             // Calculate scores
             const scores = calculateScores();
             const priorities = getPrioritiesForResults(scores);
@@ -3074,6 +3410,34 @@
             
             // Update FTP
             updateProgress();
+            
+            // Save to database if logged in
+            if (isOnlineMode && currentUser) {
+                const result = await saveAssessmentToDatabase();
+                if (result.success) {
+                    showToastMessage('✓ Assessment saved to database!');
+                    // Update submission code section to show database mode
+                    const codeCard = document.querySelector('.submission-code-card');
+                    if (codeCard) {
+                        codeCard.innerHTML = `
+                            <div style="text-align: center; padding: 20px;">
+                                <span class="icon icon-lg" style="color: var(--green);"><i data-lucide="cloud-check"></i></span>
+                                <h4 style="margin-top: 12px; color: var(--green);">Saved to Database</h4>
+                                <p style="color: var(--grey-600); margin-top: 8px; font-size: 13px;">
+                                    Your Guru can see your results instantly in Guru Mode.<br>
+                                    No code needed!
+                                </p>
+                                <div style="margin-top: 16px; padding: 12px; background: var(--grey-100); border-radius: 4px;">
+                                    <span style="font-size: 12px; color: var(--grey-600);">Logged in as:</span><br>
+                                    <strong>${currentUser.name}</strong> - ${currentCompany?.name || ''}
+                                </div>
+                            </div>
+                        `;
+                    }
+                } else {
+                    showToastMessage('⚠ Could not save to database. Use code below.');
+                }
+            }
             
             lucide.createIcons();
         }
@@ -3635,12 +3999,22 @@
             }
         }
 
+        // Debounce timer for database saves
+        let actionSaveTimeout = null;
+        
         function updateWWW(index, field, value) {
             if (!actions[index]) actions[index] = { what: '', who: '', when: '' };
             actions[index][field] = value;
             
-            
             updateProgress();
+            
+            // Debounced save to database (waits 1 second after typing stops)
+            if (isOnlineMode && currentCompany) {
+                clearTimeout(actionSaveTimeout);
+                actionSaveTimeout = setTimeout(() => {
+                    saveActionsToDatabase();
+                }, 1000);
+            }
         }
 
         function updateAction(index, field, value) {
@@ -3797,16 +4171,85 @@
             }
         }
         
-        function openGuruMode() {
+        async function openGuruMode() {
             document.getElementById('guru-fullscreen').classList.add('active');
             document.body.style.overflow = 'hidden';
             renderImportedList();
+            
+            // Load companies for dropdown
+            await loadCompaniesDropdown();
+            
             lucide.createIcons();
         }
         
         function closeGuruMode() {
             document.getElementById('guru-fullscreen').classList.remove('active');
             document.body.style.overflow = '';
+        }
+        
+        // Load companies into dropdown
+        async function loadCompaniesDropdown() {
+            const select = document.getElementById('company-select');
+            if (!select) return;
+            
+            const companies = await getAllCompanies();
+            
+            select.innerHTML = '<option value="">Select a company...</option>';
+            companies.forEach(company => {
+                const option = document.createElement('option');
+                option.value = company.id;
+                option.textContent = `${company.name}${company.guru_name ? ` (Guru: ${company.guru_name})` : ''}`;
+                select.appendChild(option);
+            });
+        }
+        
+        // Load assessments from database for selected company
+        async function loadCompanyAssessments() {
+            const select = document.getElementById('company-select');
+            const statusEl = document.getElementById('db-load-status');
+            const companyId = select?.value;
+            
+            if (!companyId) {
+                statusEl.style.display = 'block';
+                statusEl.style.color = 'var(--red)';
+                statusEl.textContent = 'Please select a company';
+                return;
+            }
+            
+            // Show loading
+            statusEl.style.display = 'block';
+            statusEl.style.color = 'var(--grey-600)';
+            statusEl.textContent = 'Loading team assessments...';
+            
+            try {
+                const assessments = await loadTeamAssessmentsFromDatabase(companyId);
+                
+                if (assessments.length === 0) {
+                    statusEl.style.color = 'var(--amber)';
+                    statusEl.textContent = 'No assessments found for this company yet.';
+                    return;
+                }
+                
+                // Clear existing and add from database
+                teamAssessments = assessments;
+                
+                // Update UI
+                renderImportedList();
+                
+                if (teamAssessments.length >= 2) {
+                    renderTeamSummary();
+                }
+                
+                statusEl.style.color = 'var(--green)';
+                statusEl.textContent = `✓ Loaded ${assessments.length} assessment(s) from database!`;
+                
+                showToastMessage(`✓ Loaded ${assessments.length} team assessments`);
+                
+            } catch (error) {
+                console.error('Load error:', error);
+                statusEl.style.color = 'var(--red)';
+                statusEl.textContent = 'Error loading assessments. Please try again.';
+            }
         }
         
         // Generate submission code from current assessment
